@@ -41,8 +41,7 @@ Lowest value Fst:
 Number of loci with lowest fst value (-0.2085994040):  
 `grep -c -- "-0.2085994040" batch_2.fst_2-3.tsv  
 `  
-Number of loci:
-1  
+Number of loci: 1  
 ---
 ### Q6.
   `cut -f 9 batch_2.fst_2-3.tsv | sort -h | uniq -c | sort -h | tail -n 1
