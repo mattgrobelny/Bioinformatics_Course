@@ -1,0 +1,42 @@
+1a. 127.0.0.1	localhost.localdomain localhost
+1b. cd ../var/log
+1c. /var/log
+
+2a. ACPI: DSDT 00000000bfb66000 04996 (v01 DELL   PE_SC3   00000001 INTL 20050624)
+2b. vendor_id	: GenuineIntel
+2b1. head -n 2 ../../proc/cpuinfo
+2b2. head -n 2 /proc/cpuinfo
+
+3.
+total 180K
+dr-xr-xr-x   2 root root 4.0K Jul 30  2015 bin
+dr-xr-xr-x   5 root root 4.0K Jul 30  2015 boot
+drwxr-xr-x  18 root root 4.0K Jul 26 08:32 dev
+drwxr-xr-x 102 root root  12K Aug 23 03:48 etc
+drwxr-xr-x   2 root root 4.0K Sep 11  2015 gluster
+drwxr-xr-x   3 root root 4.0K Jul 30  2015 gpfs
+drwxr-xr-x  13 root root  32K Jul  1 16:00 home
+drwxr-xr-x   3 root root 4.0K Jul 30  2015 install
+dr-xr-xr-x  12 root root 4.0K Jul 30  2015 lib
+dr-xr-xr-x   8 root root  12K Jul 30  2015 lib64
+drwx------   2 root root  16K Jul 30  2015 lost+found
+drwxr-xr-x   2 root root 4.0K Sep 23  2011 media
+drwxr-xr-x   2 root root    0 Jul 26 08:32 misc
+drwxr-xr-x   3 root root 4.0K Jul 30  2015 mnt
+drwxr-xr-x   2 root root    0 Jul 26 08:32 net
+drwxr-xr-x   7 root root 4.0K May  8  2012 opt
+dr-xr-xr-x 224 root root    0 Jul 26 08:29 proc
+dr-xr-xr-x   3 root root 4.0K Aug 24 12:39 root
+dr-xr-xr-x   2 root root  12K Sep 11  2015 sbin
+drwxr-xr-x   2 root root 4.0K Sep 23  2011 selinux
+drwxr-xr-x   2 root root 4.0K Sep 23  2011 srv
+drwxr-xr-x   3 root root 4.0K Jul 30  2015 state
+drwxr-xr-x  13 root root    0 Jul 26 08:29 sys
+drwxrwxrwt   4 root root  36K Aug 24 12:33 tmp
+drwxr-xr-x  15 root root 4.0K Jul 30  2015 usr
+drwxr-xr-x  24 root root 4.0K Jul 30  2015 var
+
+4.
+% cd ~
+% cd /home
+% cd  

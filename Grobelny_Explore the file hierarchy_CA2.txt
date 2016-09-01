@@ -1,0 +1,9 @@
+$ grep -c "@" s_1_sequence.txt
+250000
+
+$ grep -c "^CGATA" s_1_sequence.txt
+19501
+
+$ grep -A 2 -B 1 "^ACCAT" --no-group-separator s_1_sequence.txt > sample_01.fq
+
+$ grep -A 1 "@" --no-group-separator s_1_sequence.txt sample_01.fq |  grep -v "@" |grep -n '^.{5}'| sort -u | uniq -w 5 -c -u

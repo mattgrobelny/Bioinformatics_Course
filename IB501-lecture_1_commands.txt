@@ -1,0 +1,10 @@
+## Day one lectures
+#
+
+ssh ib501_stud12@biocluster.igb.illinois.edu
+
+user:ib501_stud12
+pass:2@%Jr5Zg
+
+qsub -I -q classroom
+
