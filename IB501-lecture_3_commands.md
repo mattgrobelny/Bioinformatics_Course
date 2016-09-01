@@ -15,9 +15,11 @@ Example used within grep
 tab in command line == cntrl + v + tab  or use `/t`
 
 *Additional examples:*
-`grep "consensus" fish_310.tags.tsv | cut -f 3,9 | sed -E 's/([0-9]+)\t([ATCG]+)/\2\t\1/'
-`
-`grep "consensus" fish_310.tags.tsv | cut -f 3,9 | sed -E 's/([0-9]+)\t([ATCG]+)/\2\t\1/' | sed -E 's/([ATCG]+)\t([0-9]+)/\2\t\1/' | sed -E 's/^/>/' |tr '\t' '\n'`
+```
+grep "consensus" fish_310.tags.tsv | cut -f 3,9 | sed -E 's/([0-9]+)\t([ATCG]+)/\2\t\1/'
+
+grep "consensus" fish_310.tags.tsv | cut -f 3,9 | sed -E 's/([0-9]+)\t([ATCG]+)/\2\t\1/' | sed -E 's/([ATCG]+)\t([0-9]+)/\2\t\1/' | sed -E 's/^/>/' |tr '\t' '\n'
+```
 
 ## awk
   Programming language --> useful in processing within pipelines  
