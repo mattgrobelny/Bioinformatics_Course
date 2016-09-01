@@ -3,15 +3,13 @@ Matt Grobelny
 ### Q1.
   `cut -f 2 batch_2.fst_2-3.tsv | grep -E "[0-9]+" | sort -h | wc -l
 `  
-number of SNP=  
-29588  
----
+number of SNP= 29588  
+---  
 ### Q2.
   `cut -f 2 batch_2.fst_2-3.tsv | grep -E "[0-9]+" | sort -h | uniq -c | wc -l
 `  
-number of unique loci:  
-9006  
----
+number of unique loci:9006  
+---  
 ### Q3.
   `cut -f 5 batch_2.fst_2-3.tsv | grep -vE "Chr" | sort -h | uniq -c | sort -h
 `    
@@ -23,15 +21,15 @@ number of unique loci:
 | groupII |  5491|
 | groupI |  6857|
 | groupIV |7376  |
----
+---  
 ### Q4.
   `cut -f 5,6 batch_2.fst_2-3.tsv | grep "groupII" | grep -v "groupIII" | sort -h | tail -n 1
 `  
 Highest base-pair position SNP:  
 | Group# | base-pair position|
-| :---------------------- | ---------:|   
-|groupII	|9985588 |  
----
+| :---------------------- | ---------:|  
+|groupII	|9985588 |    
+---  
 ### Q5.
   `cut -f 9 batch_2.fst_2-3.tsv | sort -h | head -n 1
 `    
