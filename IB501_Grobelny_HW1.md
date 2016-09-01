@@ -34,12 +34,11 @@ Highest base-pair position SNP:
 ---  
 ### Q5.
   `cut -f 9 batch_2.fst_2-3.tsv | sort -h | head -n 1
-`
+`  
 Lowest value Fst:  
 -0.2085994040  
 
 Number of loci with lowest fst value (-0.2085994040):  
-
 `grep -c -- "-0.2085994040" batch_2.fst_2-3.tsv  
 `  
 Number of loci:
