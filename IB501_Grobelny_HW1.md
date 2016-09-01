@@ -1,4 +1,4 @@
-# IB501: Problem Set 1  
+# Problem Set 1  
 Matt Grobelny
 ### Q1.
   `cut -f 2 batch_2.fst_2-3.tsv | grep -E "[0-9]+" | sort -h | wc -l
