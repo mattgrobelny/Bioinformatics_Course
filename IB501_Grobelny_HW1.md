@@ -2,12 +2,12 @@
 Matt Grobelny
 ### Q1.
   `cut -f 2 batch_2.fst_2-3.tsv | grep -E "[0-9]+" | sort -h | wc -l
-`  
+`
 number of SNP= 29588  
 ---  
 ### Q2.
   `cut -f 2 batch_2.fst_2-3.tsv | grep -E "[0-9]+" | sort -h | uniq -c | wc -l
-`  
+`
 number of unique loci:9006  
 ---  
 ### Q3.
@@ -25,21 +25,24 @@ number of unique loci:9006
 ### Q4.
   `cut -f 5,6 batch_2.fst_2-3.tsv | grep "groupII" | grep -v "groupIII" | sort -h | tail -n 1
 `  
-Highest base-pair position SNP:  
+Highest base-pair position SNP:
+
 | Group# | base-pair position|
 | :---------------------- | ---------:|  
-|groupII	|9985588 |    
+|groupII	|9985588 |
+
 ---  
 ### Q5.
   `cut -f 9 batch_2.fst_2-3.tsv | sort -h | head -n 1
-`    
+`
 Lowest value Fst:  
 -0.2085994040  
 
 Number of loci with lowest fst value (-0.2085994040):  
+
 `grep -c -- "-0.2085994040" batch_2.fst_2-3.tsv  
 `  
-Number of loci:  
+Number of loci:
 1  
 ---
 ### Q6.
