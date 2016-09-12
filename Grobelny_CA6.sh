@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 cd fst
 rm batch_2.fst_1-2.Chr_only.tsv
 rm batch_2.fst_1-3.Chr_only.tsv
@@ -10,18 +10,19 @@ cat batch_2.fst_1-3.tsv | grep -vwE "scaffold_[0-9]+" > batch_2.fst_1-3.Chr_only
 
 cat batch_2.fst_2-3.tsv | grep -vwE "scaffold_[0-9]+" > batch_2.fst_2-3.Chr_only.tsv
 
-#filenames_files=$(ls -1 | grep -E "batch_2.fst_[12]-[23].Chr_only")
-#echo "done"
-
+# collect list of Chr and store as var
 chr_list=$(cut -f 5 "batch_2.fst_2-3.Chr_only.tsv" | sed 1d | sort | uniq |sort)
 
+# make list of files to work with
 files_Chr_only="batch_2.fst_1-2.Chr_only.tsv
 batch_2.fst_1-3.Chr_only.tsv
 batch_2.fst_2-3.Chr_only.tsv"
 
-mkdir -f CA_6_output
-
+# make dir for output of all files 
+mkdir CA_6_output
 cd CA_6_output
+
+
 for file in $files_Chr_only
 do
   echo "working on $file"
