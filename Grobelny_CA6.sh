@@ -18,7 +18,7 @@ files_Chr_only="batch_2.fst_1-2.Chr_only.tsv
 batch_2.fst_1-3.Chr_only.tsv
 batch_2.fst_2-3.Chr_only.tsv"
 
-# make dir for output of all files 
+# make dir for output of all files
 mkdir CA_6_output
 cd CA_6_output
 
@@ -31,11 +31,12 @@ do
   do
     echo "working on $i group from $file"
 
-    file_name=$(echo "$file" | grep -oE "batch_2.fst_[12]-[23].Chr_only.")
+    file_name=$(echo "$file" | grep -oE "batch_2.fst_[12]-[23]")
     tsv=".tsv"
-    it_file_name="$file_name$i$tsv"
+    under_score="_"
+    it_file_name="$file_name$under_score$i$tsv"
 
-    grep -wE ""$i"" $file > "$it_file_name"
+    grep -wE ""$i"" ../$file > "$it_file_name"
   done
 done
 
@@ -48,12 +49,12 @@ echo "Testing how many groupI were in orginal file batch_2.fst_1-2.Chr_only.tsv"
 grep -wE "groupI" ~/shell/fst/batch_2.fst_1-2.Chr_only.tsv | wc -l
 
 echo "Testing how many lines in batch_2.fst_1-2.Chr_only.groupI.tsv"
-wc -l ~/shell/fst/batch_2.fst_1-2.Chr_only.groupI.tsv
+wc -l ~/shell/fst/CA_6_output/batch_2.fst_1-2_groupI.tsv
 
 echo "If above numbers are not the same something went wrong"
 
 echo "Checking for presence of other group numbers in batch_2.fst_1-2.Chr_only.groupI.tsv"
 
-grep -E 'groupII' ~/shell/fst/batch_2.fst_1-2.Chr_only.groupI.tsv | wc -l
+grep -E 'groupII' ~/shell/fst/CA_6_output/batch_2.fst_1-2_groupI.tsv | wc -l
 
 echo " if above numeber is not zero then something went wrong "
