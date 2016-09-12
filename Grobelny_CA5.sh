@@ -16,7 +16,8 @@ wc -l indiv_1_to_5.fq
 
 lines_from_cated_file=$(wc -l indiv_1_to_5.fq | grep -Eo "[0-9]{5}")
 
-if ["$lines_from_cated_file" == "$total_lines"]; then
+if (($lines_from_cated_file = $total_lines ));
+then
   echo "Total lines from the 5 files:"
   echo "$total_lines"
   echo "Lines from catted file:"
