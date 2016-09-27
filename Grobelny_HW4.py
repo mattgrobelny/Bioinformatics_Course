@@ -171,10 +171,6 @@ fh3.close
 for i in range(101):
     median_list_output[1][i] = np.median(median_list[i])
 
-print median_list_output
-
-
-print qual_list[0],qual_list[2] ,var_std_dev_list[3]
 ###############################################################################
 # Plot data
 plt.errorbar(qual_list[0], qual_list[2], yerr=var_std_dev_list[3], fmt='o')
@@ -189,7 +185,7 @@ plt.savefig('avg_qual_per_base.png')
 plt.close()
 
 # Plot data
-for i in [5, 95]:
+for i in [6, 95]:
     xlist = range(43)
     plt.hist(median_list[i])
 
@@ -204,3 +200,41 @@ for i in [5, 95]:
     plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
     plt.close()
 ###############################################################################
+# Output final data matrix
+
+final_out_put = []
+final_out_put.append(qual_list[0])           # base pair number
+final_out_put.append(qual_list[2])           # mean quality score
+final_out_put.append(var_std_dev_list[2])    # variance
+final_out_put.append(var_std_dev_list[3])    # standard dev
+final_out_put.append(median_list_output[1])  # median
+
+print final_out_put
+
+###############################################################################
+# Print sums for quality score at pos 6 and
+
+
+uniq_score_6 = {}
+uniq_score_95 = {}
+
+for i in median_list[6]:
+    uniq_score_6[i] = uniq_score_6.get(i, 0) + 1
+
+for i in median_list[95]:
+    uniq_score_95[i] = uniq_score_95.get(i, 0) + 1
+
+# Open file for writing
+file_out = "/home/a-m/ib501_stud12/shell/HW_4_out.txt"
+fh_out = open(in_file, 'w')
+fh_out.write("Summed Quality scores for nucleotide pos 6 and 95: \n")
+
+for key in uniq_score_6.key:
+    fh_out.write(key, ": ", uniq_score_6[key])
+
+fh_out.write("\n")
+
+for key in uniq_score_95.key:
+    fh_out.write(key, ": ", uniq_score_95[key])
+
+fh_out.close
