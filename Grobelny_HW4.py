@@ -2,7 +2,12 @@
 # Runs on python/2.7.9 from cluster
 import sys
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
+
+# Force matplotlib to not use any Xwindows backend.
 
 # Grobelny HW 4
 
@@ -165,15 +170,14 @@ fh3.close
 
 for i in range(101):
     median_list_output[1][i] = np.median(median_list[i])
-#print median_list[1]
+
 print median_list_output
 
 
+print qual_list[0],qual_list[2] ,var_std_dev_list[3]
 ###############################################################################
 # Plot data
 plt.errorbar(qual_list[0], qual_list[2], yerr=var_std_dev_list[3], fmt='o')
-
-# Add labels
 plt.xlabel('Base #')
 plt.ylabel('Quality Score (phred)')
 plt.title('Avg Quality per Base')
@@ -182,20 +186,21 @@ plt.grid(True)
 print "Saving Plot of: avg_qual_per_base.png"
 # Save first graph
 plt.savefig('avg_qual_per_base.png')
-
+plt.close()
 
 # Plot data
 for i in [5, 95]:
     xlist = range(43)
-    plot.hist(xlist, median_list[i])
+    plt.hist(median_list[i])
 
     # Add labels
-    plt.xlabel('Quality Score (phred)')
-    plt.ylabel('Quality Score Freq')
-    plt.title('Distribution of Quality scores at %s Base') % (i)
+    plt.xlabel("Quality Score (phred)")
+    plt.ylabel("Quality Score Freq")
+    plt.title("Distribution of Quality scores at %s Base" % (str(i)))
     plt.grid(True)
 
-    print "Saving Plot of: dis_of_qual_at_base%s.png" % (i)
+    print "Saving Plot of: dis_of_qual_at_base%s.png" % (str(i))
     # Save first graph
-    plt.savefig("dis_of_qual_at_base%s.png") % (i)
+    plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
+    plt.close()
 ###############################################################################
