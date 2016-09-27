@@ -57,7 +57,7 @@ for line in fh2:
     qual_type = ""
     if count % 4 == 1:
         for i in line:
-            # convert ASCII to ints ofset by 33
+            # convert ASCII to ints offset by 33
             q_score_for_nuc = ord(str(i)) - 33
 
             # asign good qual threshold
