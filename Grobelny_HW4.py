@@ -26,8 +26,9 @@ qual_list.append([])  # [2] = avg quality score
 # make 2nd 2d array
 var_std_dev_list = []
 var_std_dev_list.append([])  # [0] = base number
-var_std_dev_list.append([])  # [1] = variance
-var_std_dev_list.append([])  # [2] = standard dev
+var_std_dev_list.append([])  # [1] = variance totals
+var_std_dev_list.append([])  # [2] = variance
+var_std_dev_list.append([])  # [3] = standard dev
 
 # make 3rd 2d array
 median_list = []
@@ -48,7 +49,6 @@ for i in range(101):
     median_list[1].append({})
     median_list[2].append(0)
 
-print qual_list
 
 # open file
 in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
@@ -82,8 +82,6 @@ for line in fh2:
     else:
         continue
 fh2.close
-print qual_list
-print record_count
 
 # calculating avg stats for each base
 for i in range(101):
