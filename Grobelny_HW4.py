@@ -14,7 +14,7 @@ def progress(count, total, suffix=''):
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
 
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
-    sys.stdout.flush()  # As suggested by Rom Ruben
+    sys.stdout.flush()
 
 print "constructing arrays\n"
 # make 2d array
@@ -46,13 +46,14 @@ for i in range(101):
     qual_list[2].append(0.0)
     var_std_dev_list[1].append(0.0)
     var_std_dev_list[2].append(0.0)
+    var_std_dev_list[3].append(0.0)
     median_list[1].append({})
     median_list[2].append(0)
 
 
 # open file
 in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
-fh2 = open(in_file, 'r')
+fh1 = open(in_file, 'r')
 
 # line counter
 count = 0
@@ -61,12 +62,12 @@ count = 0
 record_count = 0
 
 # skip record name, seq, quality name
-next(fh2)
-next(fh2)
-next(fh2)
+next(fh1)
+next(fh1)
+next(fh1)
 
 print "\nCalculating Avg quality per base..."
-for line in fh2:
+for line in fh1:
     count = count + 1
     if count % 4 == 1:
         record_count += 1
@@ -81,36 +82,36 @@ for line in fh2:
 
     else:
         continue
-fh2.close
+fh1.close
 
 # calculating avg stats for each base
 for i in range(101):
     qual_list[2][i] = float(qual_list[1][i]) / float(record_count)
 
 print qual_list
-
+print count
 ###############################################################################
 # open file
-in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
-fh2 = open(in_file, 'r')
+in_file2 = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
+fh2 = open(in_file2, 'r')
 
 # skip record name, seq, quality name
 next(fh2)
 next(fh2)
 next(fh2)
-
+count2 = 0
 print "\nCalculating variance and standard dev per base..."
 for line in fh2:
-    count = count + 1
+    count2 = count2 + 1
     if count % 4 == 1:
         # update progress bar
-        progress(count, 4000000 * 4, suffix='Percent done')
+        progress(count2, 4000000 * 4, suffix='Percent done')
         for i in range(101):
             # convert ASCII to ints offset by 33
-            variance_score = (abs((ord(str(line[i])) - 33) - qual_list[2][i])) ** 2
-
+            print line[i], qual_list[2][i]
+            variance_score = abs((ord(str(line[i])) - 33) - qual_list[2][i])
             # add up qual scores at base number
-            var_std_dev_list[1][i] = var_std_dev_list[1][i] + float(variance_score)
+            var_std_dev_list[1][i] = var_std_dev_list[1][i] + float(variance_score ** 2)
 
     else:
         continue
