@@ -1,4 +1,3 @@
-#!/usr/bin/python/2.7.9
 # Runs on python/2.7.9 from cluster
 import sys
 import numpy as np
@@ -28,6 +27,8 @@ def convert_phred(asiic_score):
         q_score_for_nuc = ord(str(asiic_score)) - 33
         return q_score_for_nuc
 
+# done with functions
+###############################################################################
 print "constructing arrays\n"
 # make 2d array
 qual_list = []
@@ -66,7 +67,7 @@ in_file = "/home/a-m/ib501_stud12/shell/lane1.short.fastq"
 fh1 = open(in_file, 'r')
 
 # file length
-#file_length = 4000000 * 4
+# file_length = 4000000 * 4
 file_length = 1000
 
 # line counter
@@ -101,9 +102,6 @@ fh1.close
 # calculating avg stats for each base
 for i in range(101):
     qual_list[2][i] = float(qual_list[1][i]) / float(record_count)
-
-print qual_list
-print count
 
 ###############################################################################
 # Part 2
@@ -213,28 +211,38 @@ print final_out_put
 
 ###############################################################################
 # Print sums for quality score at pos 6 and
-
-
 uniq_score_6 = {}
 uniq_score_95 = {}
 
-for i in median_list[6]:
-    uniq_score_6[i] = uniq_score_6.get(i, 0) + 1
+for val in median_list[6]:
+    if val in uniq_score_6.keys():
+        uniq_score_6[val] = uniq_score_6[val] + 1
+    else:
+        uniq_score_6[val] = 1
 
 for i in median_list[95]:
-    uniq_score_95[i] = uniq_score_95.get(i, 0) + 1
+    if i in uniq_score_95.keys():
+        uniq_score_95[i] = uniq_score_95[i] + 1
+    else:
+        uniq_score_95[i] = 1
+
 
 # Open file for writing
 file_out = "/home/a-m/ib501_stud12/shell/HW_4_out.txt"
-fh_out = open(in_file, 'w')
+fh_out = open(file_out, 'w')
 fh_out.write("Summed Quality scores for nucleotide pos 6 and 95: \n")
+fh_out.write("Quality_Score : Count\n")
 
-for key in uniq_score_6.key:
-    fh_out.write(key, ": ", uniq_score_6[key])
+# print out sorted coutns of each quality
+for key in sorted(uniq_score_6.keys()):
+    print_me = "%s : %s \n" % (key, uniq_score_6[key])
+    fh_out.write(print_me)
 
 fh_out.write("\n")
 
-for key in uniq_score_95.key:
-    fh_out.write(key, ": ", uniq_score_95[key])
+fh_out.write("Quality_Score : Count\n")
+for key in sorted(uniq_score_95.keys()):
+    print_me = "%s : %s \n" % (key, uniq_score_95[key])
+    fh_out.write(print_me)
 
 fh_out.close
