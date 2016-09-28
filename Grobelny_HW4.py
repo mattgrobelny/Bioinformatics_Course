@@ -83,18 +83,18 @@ for i in range(101):
 
 ###############################################################################
 # open file
-in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
+#in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
 
 # TesT file
-# in_file = "/home/a-m/ib501_stud12/shell/lane1.short.fastq"
+in_file = "/home/a-m/ib501_stud12/shell/lane1.short.fastq"
 fh1 = open(in_file, 'r')
 
 
 ###############################################################################
 # file length for progress bar
-file_length = 4000000 * 4
+#file_length = 4000000 * 4
 # Test file length
-# file_length = 1000
+file_length = 1000
 
 # line counter
 count = 0
@@ -194,7 +194,10 @@ fh3.close
 
 # Determine median at each nucleotide postion and place in an array
 for i in range(101):
-    median_list_output[1][i] = np.median(median_list[i])
+    sorted_median = []
+    sorted_median.append(sorted(median_list[i]))
+    len_of_median = len(median_list[i])
+    median_list_output[1][i] = sorted_median[0][len_of_median/2]
 
 ###############################################################################
 # Plot data
