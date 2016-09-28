@@ -1,4 +1,8 @@
+###############################################################################
+# Grobelny HW 4
+
 # Runs on python/2.7.9 from cluster
+###############################################################################
 import sys
 import numpy as np
 import matplotlib
@@ -6,11 +10,11 @@ matplotlib.use("Agg")  # Force matplotlib to not use any Xwindows backend.
 
 import matplotlib.pyplot as plt
 
-# Grobelny HW 4
 
-# progress bar is not my own work from:
+###############################################################################
+# Progress bar is not my own work from:
 # https://gist.github.com/vladignatyev/06860ec2040cb497f0f3
-
+#
 def progress(count, total, suffix=''):
     bar_len = 60
     filled_len = int(round(bar_len * count / float(total)))
@@ -20,14 +24,17 @@ def progress(count, total, suffix=''):
 
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
     sys.stdout.flush()
-
+##################################################
 # Set up quick phred convert func
+
 def convert_phred(asiic_score):
         q_score_for_nuc = ord(str(asiic_score)) - 33
         return q_score_for_nuc
 
 # done with functions
 ###############################################################################
+# Set up arrays for later use
+
 print "constructing arrays\n"
 # make 2d array
 qual_list = []
@@ -46,7 +53,7 @@ median_list_output = []
 median_list_output.append([])
 median_list_output.append([])
 
-# fill arrays with vals
+# fill arrays with values range 0:100 or 0.0
 for i in range(101):
     # add base numbers to each array
     qual_list[0].append(i)
@@ -81,12 +88,13 @@ count = 0
 # record counter
 record_count = 0
 
+###############################################################################
 # skip record name, seq, quality name
 next(fh1)
 next(fh1)
 next(fh1)
 
-print "\nCalculating Avg quality per base..."
+print "\nCalculating Avg quality per base position..."
 for line in fh1:
     count = count + 1
     if count % 4 == 1:
@@ -119,16 +127,16 @@ next(fh2)
 next(fh2)
 count2 = 0
 
-print "\nCalculating variance and standard dev per base..."
+print "\nCalculating variance and standard dev per base position..."
 for line in fh2:
     count2 = count2 + 1
     if count2 % 4 == 1:
         # update progress bar
         progress(count2, file_length, suffix='Percent done')
         for i in range(101):
-            # convert ASCII to ints offset by 33
+            # Calculate difference between mean and each quality score
             variance_score = abs(convert_phred(line[i]) - qual_list[2][i])
-            # add up qual scores at base number
+            # sum up total variance^2 and place in array
             var_std_dev_list[1][i] = var_std_dev_list[1][i] + float(variance_score ** 2)
 
     else:
@@ -140,8 +148,6 @@ for i in range(101):
     var_std_dev_list[2][i] = float(var_std_dev_list[1][i]) / float(record_count)
     # Calc standard dev
     var_std_dev_list[3][i] = float(np.sqrt(var_std_dev_list[2][i]))
-print var_std_dev_list
-
 
 ###############################################################################
 # Part 3
@@ -159,23 +165,27 @@ next(fh3)
 next(fh3)
 next(fh3)
 count3 = 0
-print "\nCalculating median quality per base..."
+print "\nCalculating median quality per base position..."
 for line in fh3:
     count3 = count3 + 1
     if count3 % 4 == 1:
         # update progress bar
         progress(count3, file_length, suffix='Percent done')
         for i in range(101):
+            # group all quality scores for each nucleotide position
             median_list[i].append(convert_phred(line[i]))
     else:
         continue
 fh3.close
 
+# Determine median at each nucleotide postion and place in an array
 for i in range(101):
     median_list_output[1][i] = np.median(median_list[i])
 
 ###############################################################################
 # Plot data
+
+# Plot nucleotide position vs avg quality with standard devation
 plt.errorbar(qual_list[0], qual_list[2], yerr=var_std_dev_list[3], fmt='o')
 plt.xlabel('Base #')
 plt.ylabel('Quality Score (phred)')
@@ -187,10 +197,17 @@ print "Saving Plot of: avg_qual_per_base.png"
 plt.savefig('avg_qual_per_base.png')
 plt.close()
 
-# Plot data
+# Plot data part 2
+# Plot quality score distribution at nucleotide postions 6 and 95
+
+# *************************************************************************** #
+# Assuming nucleotide positions 6 and 95 is in the same index as python
+# with 0 being the first position so 6th is index 5 and 95th is 94 index postion
+# *************************************************************************** #
+
 for i in [6, 95]:
     xlist = range(43)
-    plt.hist(median_list[i])
+    plt.hist(median_list[i - 1])
 
     # Add labels
     plt.xlabel("Quality Score (phred)")
@@ -203,7 +220,7 @@ for i in [6, 95]:
     plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
     plt.close()
 ###############################################################################
-# Output final data matrix
+# Output final data matrix of all calculated stats
 
 final_out_put = []
 final_out_put.append(qual_list[0])           # base pair number
@@ -212,6 +229,7 @@ final_out_put.append(var_std_dev_list[2])    # variance
 final_out_put.append(var_std_dev_list[3])    # standard dev
 final_out_put.append(median_list_output[1])  # median
 
+print "\nMatrix of all calculated stats:"
 print final_out_put
 
 ###############################################################################
@@ -240,7 +258,7 @@ fh_out.write("Summed Quality scores for nucleotide pos 6 and 95: \n\n")
 fh_out.write("--- Position 6 ---\n")
 fh_out.write("Quality_Score : Count\n")
 
-# print out sorted coutns of each quality
+# print out sorted counts of each quality
 for key in sorted(uniq_score_6.keys()):
     print_me = "%s : %s \n" % (key, uniq_score_6[key])
     fh_out.write(print_me)
