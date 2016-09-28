@@ -1,8 +1,22 @@
 ###############################################################################
 # Grobelny HW 4
+# Goal: Write a program which takes in a illumina fastq file and :
+# 1) Finds the mean quality at each base postion
+# 2) Finds the variance of quality at each base postion
+# 3) Finds the standard dev of quality at each base postion
+# 4) Finds the median quality at each base postion
+# 5) Plots the base postion vs avg quality with standard dev
+#
+# --------------------------------------------------------------------------- #
+#
+# 6) Find the distribution of quality scores at nucleotide positions 6 and 95
+# 7) Plot the distribution of quality scores at nucleotide positions 6 and 95
+# 8) Write to file the counts of each quality score at nucleotide positions 6 and 95
 
-# Runs on python/2.7.9 from cluster
+# Runs on python/2.7.9
 ###############################################################################
+from datetime import datetime
+startTime = datetime.now()
 import sys
 import numpy as np
 import matplotlib
@@ -273,5 +287,6 @@ for key in sorted(uniq_score_95.keys()):
 
 fh_out.close
 
+print " \nFinish! \nDone in:", datetime.now() - startTime
 # Done
 ###############################################################################
