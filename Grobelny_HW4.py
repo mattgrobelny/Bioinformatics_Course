@@ -2,11 +2,9 @@
 import sys
 import numpy as np
 import matplotlib
-matplotlib.use("Agg")
+matplotlib.use("Agg")  # Force matplotlib to not use any Xwindows backend.
 
 import matplotlib.pyplot as plt
-
-# Force matplotlib to not use any Xwindows backend.
 
 # Grobelny HW 4
 
@@ -23,6 +21,7 @@ def progress(count, total, suffix=''):
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
     sys.stdout.flush()
 
+# Set up quick phred convert func
 def convert_phred(asiic_score):
         q_score_for_nuc = ord(str(asiic_score)) - 33
         return q_score_for_nuc
@@ -47,7 +46,7 @@ median_list_output = []
 median_list_output.append([])
 median_list_output.append([])
 
-
+# fill arrays with vals
 for i in range(101):
     # add base numbers to each array
     qual_list[0].append(i)
@@ -61,14 +60,20 @@ for i in range(101):
     var_std_dev_list[3].append(0.0)
     median_list_output[1].append(0.0)
 
+###############################################################################
 # open file
-# in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
-in_file = "/home/a-m/ib501_stud12/shell/lane1.short.fastq"
+in_file = "/home/a-m/ib501_stud12/shell/lane1_NoIndex_L001_R1_003.fastq"
+
+# TesT file
+# in_file = "/home/a-m/ib501_stud12/shell/lane1.short.fastq"
 fh1 = open(in_file, 'r')
 
-# file length
-# file_length = 4000000 * 4
-file_length = 1000
+
+###############################################################################
+# file length for progress bar
+file_length = 4000000 * 4
+# Test file length
+# file_length = 1000
 
 # line counter
 count = 0
@@ -210,10 +215,11 @@ final_out_put.append(median_list_output[1])  # median
 print final_out_put
 
 ###############################################################################
-# Print sums for quality score at pos 6 and
+# Print counts of quality score at pos 6 and 95 --> write to file HW_4_out.txt
 uniq_score_6 = {}
 uniq_score_95 = {}
 
+# Count uniqs at pos 6 and 95
 for val in median_list[6]:
     if val in uniq_score_6.keys():
         uniq_score_6[val] = uniq_score_6[val] + 1
@@ -230,7 +236,8 @@ for i in median_list[95]:
 # Open file for writing
 file_out = "/home/a-m/ib501_stud12/shell/HW_4_out.txt"
 fh_out = open(file_out, 'w')
-fh_out.write("Summed Quality scores for nucleotide pos 6 and 95: \n")
+fh_out.write("Summed Quality scores for nucleotide pos 6 and 95: \n\n")
+fh_out.write("--- Position 6 ---\n")
 fh_out.write("Quality_Score : Count\n")
 
 # print out sorted coutns of each quality
@@ -240,9 +247,13 @@ for key in sorted(uniq_score_6.keys()):
 
 fh_out.write("\n")
 
+fh_out.write("--- Position 95 ---\n")
 fh_out.write("Quality_Score : Count\n")
 for key in sorted(uniq_score_95.keys()):
     print_me = "%s : %s \n" % (key, uniq_score_95[key])
     fh_out.write(print_me)
 
 fh_out.close
+
+# Done
+###############################################################################
