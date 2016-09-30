@@ -18,7 +18,10 @@
 from datetime import datetime
 startTime = datetime.now()
 import sys
+
+# numpy used to calc sqrt
 import numpy as np
+
 import matplotlib
 matplotlib.use("Agg")  # Force matplotlib to not use any Xwindows backend.
 

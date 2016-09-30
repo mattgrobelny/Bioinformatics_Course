@@ -37,7 +37,7 @@ print barcodes.items()
 fh2 = open(in_file, 'r')
 
 # quality threshold parameters
-phred_thresh = 50
+phred_thresh = 20
 perc_highQ_nucs = 0.8
 
 quality = {}
@@ -57,8 +57,8 @@ for line in fh2:
     qual_type = ""
     if count % 4 == 1:
         for i in line:
-            # convert ASCII to ints offset by 33
-            q_score_for_nuc = ord(str(i)) - 33
+            # convert ASCII to ints offset by 64
+            q_score_for_nuc = ord(str(i)) - 64
 
             # asign good qual threshold
             if int(q_score_for_nuc) > phred_thresh:
