@@ -254,7 +254,7 @@ final_out_put.append(median_list_output[1])  # median
 
 print "\nMatrix of all calculated stats:"
 print final_out_put
-
+np.savetxt("HW4_data.csv", final_out_put, delimiter=",")
 ###############################################################################
 # Print counts of quality score at pos 6 and 95 --> write to file HW_4_out.txt
 uniq_score_6 = {}
