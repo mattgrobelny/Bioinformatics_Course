@@ -203,7 +203,10 @@ for i in range(101):
     sorted_median = []
     sorted_median.append(sorted(median_list[i]))
     len_of_median = len(median_list[i])
-    median_list_output[1][i] = sorted_median[0][len_of_median / 2]
+    if len_of_median % 2 == 0:
+        median_list_output[1][i] = (sorted_median[0][len_of_median/2]+sorted_median[0][(len_of_median/2)+1]) / 2.0
+    else:
+    median_list_output[1][i] = sorted_median[0][(len_of_median+1)/ 2]
 
 ###############################################################################
 # Plot data
@@ -215,7 +218,7 @@ plt.ylabel('Quality Score (phred)')
 plt.title('Avg Quality per Base')
 plt.grid(True)
 
-print "Saving Plot of: avg_qual_per_base.png"
+print "\nSaving Plot of: avg_qual_per_base.png"
 # Save first graph
 plt.savefig('avg_qual_per_base.png')
 plt.close()
@@ -238,7 +241,7 @@ for i in [6, 95]:
     plt.title("Distribution of Quality scores at %s Base" % (str(i)))
     plt.grid(True)
 
-    print "Saving Plot of: dis_of_qual_at_base%s.png" % (str(i))
+    print "\nSaving Plot of: dis_of_qual_at_base%s.png" % (str(i))
     # Save first graph
     plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
     plt.close()
@@ -296,6 +299,6 @@ for key in sorted(uniq_score_95.keys()):
 
 fh_out.close
 
-print " \nFinish! \nDone in:", datetime.now() - startTime
+print "\nFinish! \nDone in:", datetime.now() - startTime
 # Done
 ###############################################################################
