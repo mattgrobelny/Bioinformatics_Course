@@ -24,8 +24,8 @@ for opt, arg in opts:
         kmer = arg
     elif opt in ("-f"):
         file_name = arg
-print "Kmer size is: ", kmer
-print "Input file is: ", file_name
+print "Kmer size is:", kmer
+print "Input file is:", file_name
 
 ###############################################################################
 # Progress bar is not my own work from:
@@ -128,23 +128,28 @@ print "#-----------------------------------------------------------------------#
 
 # Plot
 print "Graphing Kmers..."
-y_range = np.arange(0, 10000)
-plt.semilogy(y_range, np.exp(10))
-x_max=0
+# y_range = np.arange(0, 10000)
+# plt.semilogy(y_range, np.exp(10))
+x_max = 0
 if max(kmer_dic_freq.values()) <= 10000:
     x_max = round(max(kmer_dic_freq.values()))
 else:
     x_max = 10000
 
-plt.plot(list_of_kmer_occurences[1], list_of_kmer_occurences[0], linestyle='-')
-#plt.xlim([0, x_max])
+# plt.plot(list_of_kmer_occurences[1], list_of_kmer_occurences[0], linestyle='-')
+
+plt.hist(kmer_dic_freq.values())
+plt.yscale('log', nonposy='clip')
+plt.xlim([0, x_max])
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
-plt.annotate('K-mer size = %s' % (kmer), xy=(100, 100), xytext=(8000, 10000))
+plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=(6000, 10))
 plt.grid(True)
 
-print "\n Printing kmer_freq_with_Ksize_%s.png" % (kmer)
+print "\nPrinting kmer_freq_histplot_Ksize_%s.png" % (kmer)
 # Save first graph
 plt.savefig('kmer_freq_with_Ksize_%s.png' % (kmer))
 plt.close()
+
+###
