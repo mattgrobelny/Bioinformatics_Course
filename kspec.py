@@ -68,30 +68,35 @@ for val in kmer_dic.values():
 print " "
 print "#-----------------------------------------------------------------------#"
 
-list_of_kmer_counts = []
-list_of_kmer_counts.append([])
-list_of_kmer_counts.append([])
+list_of_kmer_occurences = []
+list_of_kmer_occurences.append([])
+
+
 
 # Print out list of counts of count of K-mers
 print "K-mer Frequency  Number of K-mers in this category"
 for key in sorted(kmer_dic_freq.keys()):
     print key, " ", kmer_dic_freq[key]
-    list_of_kmer_counts[0].append(key)
-    list_of_kmer_counts[1].append(kmer_dic_freq[key])
+
+# save a list of all values
+for values in sorted(kmer_dic.values()):
+    list_of_kmer_occurences[0].append(values)
 
 print " "
 print "#-----------------------------------------------------------------------#"
 # Plot
-plt.bar(list_of_kmer_counts[0], list_of_kmer_counts[1])
-t = np.arange(0, 10, 10000)
-plt.semilogy(t, np.exp(10))
+numBins = 1000
+plt.hist(list_of_kmer_occurences[0], numBins, alpha=0.8)
+y_range = np.arange(0, 10, 10000)
+plt.semilogy(y_range, np.exp(10))
+plt.xlim([0,10000])
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
 plt.annotate('K-mer size = %s' % (kmer), xy=(100, 100), xytext=(3, 4))
 plt.grid(True)
 
-print "\nSaving Plot of: kmer_freq.png"
+print "\n Printing kmer_freq_with_Ksize_%s.png" % (kmer)
 # Save first graph
 plt.savefig('kmer_freq_with_Ksize_%s.png' % (kmer))
 plt.close()
