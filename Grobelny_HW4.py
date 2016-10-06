@@ -206,7 +206,7 @@ for i in range(101):
     if len_of_median % 2 == 0:
         median_list_output[1][i] = (sorted_median[0][len_of_median/2]+sorted_median[0][(len_of_median/2)+1]) / 2.0
     else:
-    median_list_output[1][i] = sorted_median[0][(len_of_median+1)/ 2]
+        median_list_output[1][i] = sorted_median[0][(len_of_median+1)/ 2]
 
 ###############################################################################
 # Plot data
