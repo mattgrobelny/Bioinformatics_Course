@@ -27,22 +27,50 @@ for opt, arg in opts:
 print "Kmer size is: ", kmer
 print "Input file is: ", file_name
 
+###############################################################################
+# Progress bar is not my own work from:
+# https://gist.github.com/vladignatyev/06860ec2040cb497f0f3
+#
+def progress(count, total, suffix=''):
+    bar_len = 60
+    filled_len = int(round(bar_len * count / float(total)))
+
+    percents = round(100.0 * count / float(total), 1)
+    bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+    sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
+    sys.stdout.flush()
+##################################################
+
 # Dictionary storing kmers
 kmer_dic = {}
 
 # importing file
 in_file = file_name
 fh1 = open(in_file, 'r')
-count = 0
-record_count = 0
-# skip first line
-next(fh1)
 
-for line in fh1:
+# Count number of lines in a file
+num_lines = sum(1 for line in fh1)
+fh1.close
+if num_lines >= 100000:
+    print "Your file has %s number of lines..." % (num_lines)
+    print "This may take a while to process..."
+    print "...so be patience..."
+    print " "
+
+fh2 = open(in_file, 'r')
+# skip first line
+next(fh2)
+
+count = 0
+kmer_count = 0
+
+print "K-merizing the reads..."
+for line in fh2:
+    progress(count, num_lines, suffix='done')
     count = count + 1
     if count % 4 == 1:
         line.strip('\n')
-        record_count += 1
         line_length = len(line)
 
         # Starting kmer parsing 0 to length of line minus kmer size
@@ -56,9 +84,14 @@ for line in fh1:
 
             # check for kmer in dictionary and ++ if not present add to dic and equal 1
             kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+            kmer_count += 1
+
 
 # khmer freq dictionary
+#print kmer_dic.items()
+
 kmer_dic_freq = {}
+
 
 # count the number of count of kmers
 for val in kmer_dic.values():
@@ -70,30 +103,45 @@ print "#-----------------------------------------------------------------------#
 
 list_of_kmer_occurences = []
 list_of_kmer_occurences.append([])
-
-
+list_of_kmer_occurences.append([])
 
 # Print out list of counts of count of K-mers
 print "K-mer Frequency  Number of K-mers in this category"
 for key in sorted(kmer_dic_freq.keys()):
     print key, " ", kmer_dic_freq[key]
-
-# save a list of all values
-for values in sorted(kmer_dic.values()):
-    list_of_kmer_occurences[0].append(values)
+    list_of_kmer_occurences[0].append(key)
+    list_of_kmer_occurences[1].append(kmer_dic_freq[key])
 
 print " "
 print "#-----------------------------------------------------------------------#"
+
+# save a list of all values
+
+# list_of_kmer_occurences = []
+# count = 0
+# print "Preparing for graphing of kmers..."
+# for key in kmer_dic.keys():
+#     # add progress bar
+#     progress(count, kmer_count, suffix='done')
+#     list_of_kmer_occurences.append(kmer_dic[key])
+#     count += 1
+
 # Plot
-numBins = 1000
-plt.hist(list_of_kmer_occurences[0], numBins, alpha=0.8)
-y_range = np.arange(0, 10, 10000)
+print "Graphing Kmers..."
+y_range = np.arange(0, 10000)
 plt.semilogy(y_range, np.exp(10))
-plt.xlim([0,10000])
+x_max=0
+if max(kmer_dic_freq.values()) <= 10000:
+    x_max = round(max(kmer_dic_freq.values()))
+else:
+    x_max = 10000
+
+plt.plot(list_of_kmer_occurences[1], list_of_kmer_occurences[0], linestyle='-')
+#plt.xlim([0, x_max])
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
-plt.annotate('K-mer size = %s' % (kmer), xy=(100, 100), xytext=(3, 4))
+plt.annotate('K-mer size = %s' % (kmer), xy=(100, 100), xytext=(8000, 10000))
 plt.grid(True)
 
 print "\n Printing kmer_freq_with_Ksize_%s.png" % (kmer)
