@@ -3,6 +3,7 @@
 import sys
 import getopt
 import matplotlib
+import numpy as np
 matplotlib.use("Agg")  # Force matplotlib to not use Xwindows backend.
 
 import matplotlib.pyplot as plt
@@ -63,19 +64,31 @@ kmer_dic_freq = {}
 for val in kmer_dic.values():
     kmer_dic_freq[val] = kmer_dic_freq.get(val, 0) + 1
 
+
+print " "
+print "#-----------------------------------------------------------------------#"
+
 list_of_kmer_counts = []
+list_of_kmer_counts.append([])
+list_of_kmer_counts.append([])
+
 # Print out list of counts of count of K-mers
 print "K-mer Frequency  Number of K-mers in this category"
 for key in sorted(kmer_dic_freq.keys()):
     print key, " ", kmer_dic_freq[key]
-    list_of_kmer_counts.append([key, kmer_dic_freq[key]])
+    list_of_kmer_counts[0].append(key)
+    list_of_kmer_counts[1].append(kmer_dic_freq[key])
 
+print " "
+print "#-----------------------------------------------------------------------#"
 # Plot
-plt.plot(list_of_kmer_counts[0], list_of_kmer_counts[1], fmt='o')
+plt.bar(list_of_kmer_counts[0], list_of_kmer_counts[1])
+t = np.arange(0, 10, 10000)
+plt.semilogy(t, np.exp(10))
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
-ax.annotate('K-mer size = %s' % (kmer), xy=(2, 1), xytext=(3, 4), arrowprops=dict(facecolor='black', shrink=0.05))
+plt.annotate('K-mer size = %s' % (kmer), xy=(100, 100), xytext=(3, 4))
 plt.grid(True)
 
 print "\nSaving Plot of: kmer_freq.png"
