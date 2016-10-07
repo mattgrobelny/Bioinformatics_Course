@@ -27,6 +27,7 @@ for opt, arg in opts:
 print "Kmer size is:", kmer
 print "Input file is:", file_name
 
+
 ###############################################################################
 # Progress bar is not my own work from:
 # https://gist.github.com/vladignatyev/06860ec2040cb497f0f3
@@ -108,6 +109,15 @@ for key in sorted(kmer_dic_freq.keys()):
 print " "
 print "#-----------------------------------------------------------------------#"
 
+# Open file for writing
+file_out = "./%s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+fh_out = open(file_out, 'w')
+fh_out.write("K-mer Frequency  Number of K-mers in this category \n")
+for key in sorted(kmer_dic_freq.keys()):
+    fh_out.write(key, " ", kmer_dic_freq[key])
+    fh_out.write("\n")
+fh_out.close
+
 # Ploting
 print "Graphing Kmers..."
 
@@ -119,7 +129,7 @@ plt.title('Counts of the number of Kmer Occurences')
 plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=(6000, 10))
 plt.grid(True)
 
-print "\nPrinting kmer_freq_histplot_Ksize_%s.png" % (kmer)
+print "\nPrinting %s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer)
 # Save first graph
-plt.savefig('kmer_freq_histplot_Ksize_%s.png' % (kmer))
+plt.savefig("%s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer))
 plt.close()
