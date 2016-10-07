@@ -112,9 +112,11 @@ print "#-----------------------------------------------------------------------#
 # Open file for writing
 file_out = "./%s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer)
 fh_out = open(file_out, 'w')
+
 fh_out.write("K-mer Frequency  Number of K-mers in this category \n")
 for key in sorted(kmer_dic_freq.keys()):
-    fh_out.write(key, " ", kmer_dic_freq[key])
+    print_me = (key, "\t", kmer_dic_freq[key])
+    fh_out.write(str(print_me))
     fh_out.write("\n")
 fh_out.close
 
