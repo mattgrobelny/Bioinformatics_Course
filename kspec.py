@@ -110,7 +110,7 @@ print " "
 print "#-----------------------------------------------------------------------#"
 
 # Open file for writing
-file_out = "./%s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = "./%s_kmer_freq_Data_Ksize_%s.txt" % (file_name[:-6], kmer)
 fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer Frequency  Number of K-mers in this category \n")
