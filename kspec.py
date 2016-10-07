@@ -15,18 +15,18 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:x:f:")
 except getopt.GetoptError:
-    print 'kmer.py -k <kmer_size> -f <inputfile>'
+    print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print 'kmer.py -k <kmer_size> -f <inputfile>'
+        print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
         sys.exit()
     elif opt in ("-k"):
         kmer = arg
-    elif opt in ("-f"):
-        file_name = arg
     elif opt in ("-x"):
         xmax = arg
+    elif opt in ("-f"):
+        file_name = arg
 print "Kmer size is:", kmer
 print "X-axis max kmer count is:", file_name
 print "Input file is:", file_name
