@@ -8,11 +8,12 @@ matplotlib.use("Agg")  # Force matplotlib to not use Xwindows backend.
 
 import matplotlib.pyplot as plt
 
-kmer = 0
+kmer = 11
 file_name = ""
+xmax = 2000
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hk:f:")
+    opts, args = getopt.getopt(argv, "hk:x:f:")
 except getopt.GetoptError:
     print 'kmer.py -k <kmer_size> -f <inputfile>'
     sys.exit(2)
@@ -24,7 +25,10 @@ for opt, arg in opts:
         kmer = arg
     elif opt in ("-f"):
         file_name = arg
+    elif opt in ("-x"):
+        xmax = arg
 print "Kmer size is:", kmer
+print "X-axis max kmer count is:", file_name
 print "Input file is:", file_name
 
 
@@ -122,7 +126,7 @@ fh_out.close
 print "Graphing Kmers..."
 
 plt.bar(kmer_dic_freq.keys(), kmer_dic_freq.values(), edgecolor="none", width=1.0, log=True)
-plt.xlim(0, 3000)
+plt.xlim(0, xmax)
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
