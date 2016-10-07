@@ -22,7 +22,7 @@ for opt, arg in opts:
         print "K-mer frequnecy graphing script \n"
         print "Usage: \n"
         print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile> \n\n'
-        print "Goals:
+        print "Goals: \n"
         print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy\n"
         print "2) Output graph of kmer occurence frequnecy\n"
         print "3) Output kmer occurence frequnecy to .tsv file\n"
