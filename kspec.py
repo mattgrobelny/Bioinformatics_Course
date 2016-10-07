@@ -111,15 +111,8 @@ print "#-----------------------------------------------------------------------#
 # Ploting
 print "Graphing Kmers..."
 
-x_max = 0
-if max(kmer_dic_freq.values()) <= 10000:
-    x_max = round(max(kmer_dic_freq.values()))
-else:
-    x_max = 10000
-#plt.hist(kmer_dic.values(),bins=binBoundaries)
-plt.bar(kmer_dic_freq.keys(),kmer_dic_freq.values(), edgecolor="none", width=1.0)
-plt.yscale('log', nonposy='clip')
-#plt.xlim([0, x_max])
+plt.bar(kmer_dic_freq.keys(), kmer_dic_freq.values(), edgecolor="none", width=1.0, log=True)
+plt.xlim(0, 10000)
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
