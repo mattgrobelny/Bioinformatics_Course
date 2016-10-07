@@ -127,11 +127,11 @@ fh_out.close
 print "Graphing Kmers..."
 
 plt.bar(kmer_dic_freq.keys(), kmer_dic_freq.values(), edgecolor="none", width=1.0, log=True)
-plt.xlim(0, xmax)
+plt.xlim(0, int(xmax))
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
-plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=(6000, 10))
+plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=((int(xmax)-500), 20))
 plt.grid(True)
 
 print "\nPrinting %s_kmer_freq_Data_Ksize_%s.png" % (file_name[:-6], kmer)
