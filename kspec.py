@@ -122,7 +122,7 @@ fh_out.close
 print "Graphing Kmers..."
 
 plt.bar(kmer_dic_freq.keys(), kmer_dic_freq.values(), edgecolor="none", width=1.0, log=True)
-plt.xlim(0, 10000)
+plt.xlim(0, 3000)
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
