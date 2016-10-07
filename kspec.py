@@ -14,7 +14,6 @@ xmax = 2000
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:x:f:")
-    print opts
 except getopt.GetoptError:
     print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
     sys.exit(2)
@@ -31,6 +30,7 @@ for opt, arg in opts:
 print "Kmer size is:", kmer
 print "X-axis max kmer count is:", xmax
 print "Input file is:", file_name
+print " "
 
 
 ###############################################################################
@@ -115,7 +115,7 @@ print " "
 print "#-----------------------------------------------------------------------#"
 
 # Open file for writing
-file_out = "./%s_kmer_freq_Data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = "./%s_kmer_freq_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
 fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer Frequency\tNumber of K-mers in this category\n")
@@ -131,10 +131,10 @@ plt.xlim(0, int(xmax))
 plt.xlabel('Number of K-mers')
 plt.ylabel('Number of Appearances')
 plt.title('Counts of the number of Kmer Occurences')
-plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=((int(xmax)-500), 20))
+plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=((int(xmax)- 489), 21))
 plt.grid(True)
 
-print "\nPrinting %s_kmer_freq_Data_Ksize_%s.png" % (file_name[:-6], kmer)
+print "\nPrinting %s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer)
 # Save first graph
-plt.savefig("%s_kmer_freq_Data_Ksize_%s.png" % (file_name[:-6], kmer))
+plt.savefig("%s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer))
 plt.close()
