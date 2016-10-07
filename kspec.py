@@ -14,6 +14,7 @@ xmax = 2000
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:x:f:")
+    print opts
 except getopt.GetoptError:
     print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
     sys.exit(2)
@@ -28,7 +29,7 @@ for opt, arg in opts:
     elif opt in ("-f"):
         file_name = arg
 print "Kmer size is:", kmer
-print "X-axis max kmer count is:", file_name
+print "X-axis max kmer count is:", xmax
 print "Input file is:", file_name
 
 
