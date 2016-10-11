@@ -13,11 +13,21 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:f:c:")
 except getopt.GetoptError:
-    print 'knorm.py -k <kmer_size> -f <inputfile>'
+    print 'knorm.py -k <kmer_size>[15] -c <coverage>[10] -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print 'knorm.py -k <kmer_size>[15] -c <coverage>[10] -f <inputfile>'
+        print "Read Normalization Script \n"
+        print "Usage:"
+        print "knorm.py -k <kmer_size>[15] -c <coverage>[10] -f <inputfile>\n"
+        print "Goals:"
+        print "1) Input fastq reads"
+        print "2) K-merize and filter out reads based on desired coverage"
+        print "3) Save reads with coverage less than or equal to coverage threshold in new file"
+        print ""
+        print "Output:"
+        print "FILENAME_k_KMER_cov_COVERAGE#_norm.fastq"
+
         sys.exit()
     elif opt in ("-k"):
         kmer = arg
@@ -45,10 +55,7 @@ def progress(count, total, suffix=''):
     sys.stdout.flush()
 ##################################################
 
-# Dictionary storing kmers
-kmer_dic = {}
-
-# importing file
+# Importing file for line count
 in_file = file_name
 fh1 = open(in_file, 'r')
 
@@ -61,30 +68,38 @@ if num_lines >= 100000:
     print "...so be patience..."
     print " \n"
 
-# open input file for processing
+# re-open input file for processing
 fh2 = open(in_file, 'r')
-# skip first line
 
 # open output file for reads to be kept
-outfile = str("%s_cov_%s_norm.fastq" % (file_name[:-6], coverage))
+out_file = str("%s_k_%s_cov_%s_norm.fastq" % (file_name[:-6], kmer, coverage))
 fh_out = open(out_file, 'w')
 
+# Init dictionary for storing kmers
+kmer_dic = {}
+
+# Init array for storing kmer occurence for each read
+cov_array = []
+
+# Iteration counter
 count = 1
 
-print "K-merizing the reads..."
-cov_array = []
+# variables for outputing read data
 read_name = ""
 read_seq = ""
 read_plus = "+"
 read_quality = ""
 
+print "K-merizing the reads..."
 for line in fh2:
     line.strip('\n')
+    progress(count, num_lines, suffix='done')
+
     # save read header
     if count % 4 == 1:
         read_name = line
-
-    # kmerize read sequnce
+        count += 1
+    # save sequence string and kmerize sequence
     elif count % 4 == 2:
         read_seq = line
         line_length = len(line)
@@ -105,20 +120,27 @@ for line in fh2:
             cov_array.append(kmer_dic[kmer_string])
 
         count += 1
-        progress(count, num_lines, suffix='done')
 
     # add counter for plus line
     elif count % 4 == 3:
         count += 1
-        progress(count, num_lines, suffix='done')
 
     # save quality line
     elif count % 4 == 0:
         read_quality = line
-        if np.median(cov_array) >= coverage:
-            fh_out.write("%s\n%s\n%s\n%s\n" % (read_name, read_seq, read_plus, read_quality))
-        cov_array = []
+
+        # determine if median of coverage array is <= coverage
+        if np.median(cov_array) <= coverage:
+
+            # write header, seq, +, quality score to file
+            fh_out.write("%s%s%s%s" % (read_name, read_seq, read_plus, read_quality))
+
+        cov_array = []  # clear array
         count += 1
-        progress(count, num_lines, suffix='done')
+
+# close out files
+fh2.close
+fh_out.close
 
 print "\nFinish! \nDone in:", datetime.now() - startTime
+print "Normalized reads were stored in :", out_file
