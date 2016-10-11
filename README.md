@@ -2,10 +2,10 @@
 Backup of lecture notes, hws, scripts
 
 ## Best Scripts:
-- kspec.py
-- knorm.py
--
-
+- kspec.py  
+- knorm.py  
+- ...  
+----
 ### K-mer frequency graphing script
 `kspec.py -k <kmer_size> -x <x_axis_max> -f <inputfile>  
 `   
@@ -17,8 +17,9 @@ Goals:
 
 Output:  
 1) Graphs of kmer frequency vs number of Occurences
-2) Kmer occurence vs frequency output to file
+2) Kmer occurence vs frequency output to file  
 
+----
 ### Read Normalization Script
 
 `knorm.py -k <kmer_size>[15] -c <coverage>[10] -f <inputfile>
