@@ -3,7 +3,8 @@ Backup of lecture notes, hws, scripts
 
 ## Best Scripts:
 - kspec.py  
-- knorm.py  
+- knorm.py
+- ...
 
 ----
 ### K-mer frequency graphing script
