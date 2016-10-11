@@ -39,7 +39,7 @@ for opt, arg in opts:
         coverage = arg
 print "Input file: ", file_name
 print "Kmer size: ", kmer
-print "Desired coverage:", coverage
+print "Desired coverage: %sx" % (coverage)
 
 
 

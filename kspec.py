@@ -38,7 +38,7 @@ for opt, arg in opts:
         file_name = arg
 print "Input file:", file_name
 print "Kmer size:", kmer
-print "X-axis max kmer count is:", xmax
+print "X-axis max kmer count:", xmax
 print " "
 
 
@@ -78,17 +78,17 @@ fh2 = open(in_file, 'r')
 next(fh2)
 
 count = 0
-
+kmer_range = 0
 print "K-merizing the reads..."
 for line in fh2:
     progress(count, num_lines, suffix='done')
     count = count + 1
     if count % 4 == 1:
-        line.strip('\n')
+        line.strip("\n")
         line_length = len(line)
-
+        kmer_range = int(line_length) - int(kmer) + 1
         # Starting kmer parsing 0 to length of line minus kmer size
-        for kmer_start_index in range(0, (int(line_length) - int(kmer) + 1)):
+        for kmer_start_index in range(kmer_range):
 
             # range for kmer
             kmer_end_index = kmer_start_index + int(kmer)
