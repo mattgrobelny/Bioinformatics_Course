@@ -8,6 +8,7 @@ matplotlib.use("Agg")  # Force matplotlib to not use Xwindows backend.
 
 import matplotlib.pyplot as plt
 
+# default parameters
 kmer = 11
 file_name = ""
 xmax = 2000
@@ -19,7 +20,7 @@ except getopt.GetoptError:
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print "#--- K-mer frequnecy graphing script ---#\n"
+        print "#--- K-mer frequency graphing script ---#\n"
         print "Usage:"
         print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile> \n'
         print "Goals:"
@@ -35,9 +36,9 @@ for opt, arg in opts:
         xmax = arg
     elif opt in ("-f"):
         file_name = arg
-print "Kmer size is:", kmer
+print "Input file:", file_name
+print "Kmer size:", kmer
 print "X-axis max kmer count is:", xmax
-print "Input file is:", file_name
 print " "
 
 

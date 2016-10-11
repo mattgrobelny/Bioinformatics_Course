@@ -28,7 +28,7 @@ for opt, arg in opts:
         print "3) Save reads with coverage less than or equal to coverage threshold in new file"
         print ""
         print "Output:"
-        print "FILENAME_k_KMER_cov_COVERAGE#_norm.fastq"
+        print "FILENAME_k_KMER#_cov_COVERAGE#_norm.fastq"
 
         sys.exit()
     elif opt in ("-k"):
@@ -37,9 +37,10 @@ for opt, arg in opts:
         file_name = arg
     elif opt in ("-c"):
         coverage = arg
-print "Kmer size is: ", kmer
+print "Input file: ", file_name
+print "Kmer size: ", kmer
 print "Desired coverage:", coverage
-print "Input file is: ", file_name
+
 
 
 ###############################################################################
@@ -136,8 +137,9 @@ for line in fh2:
 
             # write header, seq, +, quality score to file
             fh_out.write("%s%s%s%s" % (read_name, read_seq, read_plus, read_quality))
-
-        cov_array = []  # clear array
+            cov_array = []
+        else:
+            cov_array = []  # clear array
         count += 1
 
 # close out files
