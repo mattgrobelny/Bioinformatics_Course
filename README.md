@@ -4,7 +4,6 @@ Backup of lecture notes, hws, scripts
 ## Best Scripts:
 - kspec.py  
 - knorm.py  
-- ...  
 
 ----
 ### K-mer frequency graphing script
@@ -32,4 +31,4 @@ Goals:
 3) Save reads with coverage less than or equal to coverage threshold in new file  
 
 Output:  
-FILENAME_k_KMER#\_cov_COVERAGE#\_norm.fastq
+`FILENAME_k_KMER#_cov_COVERAGE#_norm.fastq`  
