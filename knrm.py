@@ -123,7 +123,6 @@ for line in fh2:
             cov_array.append(kmer_dic[kmer_string])
 
         count += 1
-
     # add counter for plus line
     elif count % 4 == 3:
         count += 1
@@ -133,7 +132,7 @@ for line in fh2:
         read_quality = line
 
         # determine if median of coverage array is <= coverage
-        if np.median(cov_array) <= coverage:
+        if np.median(cov_array) <= int(coverage):
 
             # write header, seq, +, quality score to file
             fh_out.write("%s\n%s\n%s\n%s\n" % (read_name, read_seq, read_plus, read_quality))
