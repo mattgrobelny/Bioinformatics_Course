@@ -95,7 +95,7 @@ read_quality = ""
 
 print "K-merizing the reads..."
 for line in fh2:
-    line.strip('\n')
+    line = line.strip('\n')
     progress(count, num_lines, suffix='done')
 
     # save read header
@@ -136,7 +136,7 @@ for line in fh2:
         if np.median(cov_array) <= coverage:
 
             # write header, seq, +, quality score to file
-            fh_out.write("%s%s%s%s" % (read_name, read_seq, read_plus, read_quality))
+            fh_out.write("%s\n%s\n%s\n%s\n" % (read_name, read_seq, read_plus, read_quality))
             cov_array = []
         else:
             cov_array = []  # clear array
