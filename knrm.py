@@ -108,7 +108,7 @@ for line in fh2:
         line_length = len(line)
 
         # Starting kmer parsing 0 to length of line minus kmer size
-        for kmer_start_index in range(0, (int(line_length) - int(kmer) + 1)):
+        for kmer_start_index in range(int(line_length) - int(kmer) + 1):
 
             # range for kmer
             kmer_end_index = kmer_start_index + int(kmer)
