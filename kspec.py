@@ -19,13 +19,13 @@ except getopt.GetoptError:
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print "K-mer frequnecy graphing script \n"
-        print "Usage: \n"
-        print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile> \n\n'
-        print "Goals: \n"
-        print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy\n"
-        print "2) Output graph of kmer occurence frequnecy\n"
-        print "3) Output kmer occurence frequnecy to .tsv file\n"
+        print "#--- K-mer frequnecy graphing script ---#\n"
+        print "Usage:"
+        print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile> \n'
+        print "Goals:"
+        print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy"
+        print "2) Output graph of kmer occurence frequnecy"
+        print "3) Output kmer occurence frequnecy to .tsv file"
         print "\n"
 
         sys.exit()

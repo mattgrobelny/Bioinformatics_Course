@@ -6,9 +6,11 @@ import sys
 import getopt
 import numpy as np
 
+# default parameters
 kmer = 15
 coverage = 10
 file_name = ""
+
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:f:c:")
@@ -17,7 +19,7 @@ except getopt.GetoptError:
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print "Read Normalization Script \n"
+        print "#--- Read Normalization Script ---#\n"
         print "Usage:"
         print "knorm.py -k <kmer_size>[15] -c <coverage>[10] -f <inputfile>\n"
         print "Goals:"
