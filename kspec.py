@@ -84,9 +84,14 @@ for line in fh2:
     progress(count, num_lines, suffix='done')
     count = count + 1
     if count % 4 == 1:
-        line.strip("\n")
+
+        # strip new line char
+        line = line.strip('\n')
+
+        # determine range of kmer
         line_length = len(line)
-        kmer_range = int(line_length) - int(kmer) + 1
+        kmer_range = line_length - int(kmer) + 1
+
         # Starting kmer parsing 0 to length of line minus kmer size
         for kmer_start_index in range(kmer_range):
 
