@@ -5,6 +5,7 @@ Backup of lecture notes, hws, scripts
 - kspec.py  
 - knorm.py  
 - ...  
+
 ----
 ### K-mer frequency graphing script
 `kspec.py -k <kmer_size> -x <x_axis_max> -f <inputfile>  
