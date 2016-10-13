@@ -131,7 +131,7 @@ elif file_type == "fasta":
                 kmer_end_index = kmer_start_index + int(kmer)
 
                 # collect khmer for this iteraton
-                kmer_string = line[kmer_start_index: kmer_end_index]
+                kmer_string = seq_total[kmer_start_index: kmer_end_index]
                 # check for kmer in dictionary and ++ if not present add to dic and equal 1
                 kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
             count += 1
