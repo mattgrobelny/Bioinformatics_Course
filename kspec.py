@@ -112,15 +112,16 @@ if str(file_type) == "fastq":
 elif file_type == "fasta":
     for line in fh2:
         progress(count, num_lines, suffix='done')
-        count += 1
         if line[0] != ">":
             line = line.strip('\n')
-            seq_total = seq_total + line
+            print "printing line:", line
+            seq_total = c + line
             count += 1
             continue
         elif line[0] == ">":
             # determine range of kmer
             line_length = len(seq_total)
+            print "determine kmer", seq_total
             kmer_range = line_length - int(kmer) + 1
 
             # Starting kmer parsing 0 to length of line minus kmer size
