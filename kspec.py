@@ -114,8 +114,8 @@ elif file_type == "fasta":
         progress(count, num_lines, suffix='done')
         if line[0] != ">":
             line = line.strip('\n')
-            print "printing line:", line
-            seq_total = c + line
+            print "printing line:"line
+            seq_total = seq_total + line
             count += 1
             continue
         elif line[0] == ">":
