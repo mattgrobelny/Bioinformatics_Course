@@ -113,30 +113,28 @@ elif file_type == "fasta":
     for line in fh2:
         progress(count, num_lines, suffix='done')
         count += 1
-        while line[0] != ">":
-            count += 1
+        if line[0] != ">":
             line = line.strip('\n')
             seq_total = seq_total + line
-            next(line)
+            count += 1
+        if line[0] == ">":
+            # determine range of kmer
+            line_length = len(seq_total)
+            kmer_range = line_length - int(kmer) + 1
 
-        # determine range of kmer
-        line_length = len(seq_total)
-        kmer_range = line_length - int(kmer) + 1
+            # Starting kmer parsing 0 to length of line minus kmer size
+            for kmer_start_index in range(kmer_range):
 
-        # Starting kmer parsing 0 to length of line minus kmer size
-        for kmer_start_index in range(kmer_range):
+                # range for kmer
+                kmer_end_index = kmer_start_index + int(kmer)
 
-            # range for kmer
-            kmer_end_index = kmer_start_index + int(kmer)
+                # collect khmer for this iteraton
+                kmer_string = line[kmer_start_index: kmer_end_index]
 
-            # collect khmer for this iteraton
-            kmer_string = line[kmer_start_index: kmer_end_index]
-
-            # check for kmer in dictionary and ++ if not present add to dic and equal 1
-            kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
-        count += 1
-        next(line)
-        seq_total = ""
+                # check for kmer in dictionary and ++ if not present add to dic and equal 1
+                kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+            count += 1
+            seq_total = ""
 
 # khmer freq dictionary
 kmer_dic_freq = {}
