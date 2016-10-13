@@ -135,6 +135,14 @@ elif file_type == "fasta":
             count += 1
             seq_total = ""
 
+# Open file for writing
+file_out = "./%s_raw_kmer_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+fh_out = open(file_out, 'w')
+
+fh_out.write("K-mer\tNumber of K-mers\n")
+for key in kmer_dic.keys():
+    fh_out.write("%s\t%s\n" % (key, kmer_dic[key]))
+fh_out.close
 
 # khmer freq dictionary
 kmer_dic_freq = {}
@@ -142,6 +150,7 @@ kmer_dic_freq = {}
 # count the number of count of kmers
 for val in kmer_dic.values():
     kmer_dic_freq[val] = kmer_dic_freq.get(val, 0) + 1
+    
 
 print " "
 print "#-----------------------------------------------------------------------#"
