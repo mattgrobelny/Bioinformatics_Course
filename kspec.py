@@ -118,7 +118,7 @@ elif file_type == "fasta":
             count += 1
             line = line.strip('\n')
             seq_total = seq_total + line
-            next(line)
+            next(fh2)
 
         # determine range of kmer
         line_length = len(seq_total)
@@ -136,7 +136,7 @@ elif file_type == "fasta":
             # check for kmer in dictionary and ++ if not present add to dic and equal 1
             kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
         count += 1
-        next(line)
+        next(fh2)
 
 # khmer freq dictionary
 kmer_dic_freq = {}
