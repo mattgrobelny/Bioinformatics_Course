@@ -80,7 +80,7 @@ if num_lines >= 100000:
 fh2 = open(in_file, 'r')
 # skip first line
 next(fh2)
-
+seq_total = ""
 count = 0
 kmer_range = 0
 if str(file_type) == "fastq":
