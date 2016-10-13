@@ -113,6 +113,7 @@ elif file_type == "fasta":
     for line in fh2:
         progress(count, num_lines, suffix='done')
         count += 1
+        seq_total = ""
         while line[0] != ">":
             count += 1
             line = line.strip('\n')
@@ -136,7 +137,6 @@ elif file_type == "fasta":
             kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
         count += 1
         next(line)
-        seq_total = ""
 
 # khmer freq dictionary
 kmer_dic_freq = {}
