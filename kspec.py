@@ -40,6 +40,7 @@ for opt, arg in opts:
     elif opt in ("-t"):
         file_type = arg
 print "Input file:", file_name
+print "Input file type:", file_type
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
 print " "
@@ -78,11 +79,11 @@ if num_lines >= 100000:
 
 fh2 = open(in_file, 'r')
 # skip first line
+next(fh2)
 
 count = 0
 kmer_range = 0
 if str(file_type) == "fastq":
-    next(fh2)
     print "K-merizing the reads..."
     for line in fh2:
         progress(count, num_lines, suffix='done')
@@ -107,31 +108,36 @@ if str(file_type) == "fastq":
 
                 # check for kmer in dictionary and ++ if not present add to dic and equal 1
                 kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+
 elif file_type == "fasta":
     for line in fh2:
         progress(count, num_lines, suffix='done')
-        count = count + 1
-        if line[0] == ">":
+        count += 1
+        while line[0] != ">":
+            count += 1
+            line = line.strip('\n')
+            seq_total = seq_total + line
             next(line)
 
-            # strip new line char
-            line = line.strip('\n')
+        # determine range of kmer
+        line_length = len(seq_total)
+        kmer_range = line_length - int(kmer) + 1
 
-            # determine range of kmer
-            line_length = len(line)
-            kmer_range = line_length - int(kmer) + 1
+        # Starting kmer parsing 0 to length of line minus kmer size
+        for kmer_start_index in range(kmer_range):
 
-            # Starting kmer parsing 0 to length of line minus kmer size
-            for kmer_start_index in range(kmer_range):
+            # range for kmer
+            kmer_end_index = kmer_start_index + int(kmer)
 
-                # range for kmer
-                kmer_end_index = kmer_start_index + int(kmer)
+            # collect khmer for this iteraton
+            kmer_string = line[kmer_start_index: kmer_end_index]
 
-                # collect khmer for this iteraton
-                kmer_string = line[kmer_start_index: kmer_end_index]
+            # check for kmer in dictionary and ++ if not present add to dic and equal 1
+            kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+        count += 1
+        next(line)
+        seq_total = ""
 
-                # check for kmer in dictionary and ++ if not present add to dic and equal 1
-                kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
 # khmer freq dictionary
 kmer_dic_freq = {}
 
