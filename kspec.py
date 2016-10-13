@@ -12,9 +12,10 @@ import matplotlib.pyplot as plt
 kmer = 11
 file_name = ""
 xmax = 2000
+file_type = "fasta"
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hk:x:f:")
+    opts, args = getopt.getopt(argv, "hk:x:f:t:")
 except getopt.GetoptError:
     print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
     sys.exit(2)
@@ -22,7 +23,7 @@ for opt, arg in opts:
     if opt == '-h':
         print "#--- K-mer frequency graphing script ---#\n"
         print "Usage:"
-        print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile> \n'
+        print 'kmer.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile> \n'
         print "Goals:"
         print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy"
         print "2) Output graph of kmer occurence frequnecy"
@@ -36,6 +37,8 @@ for opt, arg in opts:
         xmax = arg
     elif opt in ("-f"):
         file_name = arg
+    elif opt in ("-t"):
+        file_type = arg
 print "Input file:", file_name
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
@@ -75,35 +78,60 @@ if num_lines >= 100000:
 
 fh2 = open(in_file, 'r')
 # skip first line
-next(fh2)
 
 count = 0
 kmer_range = 0
-print "K-merizing the reads..."
-for line in fh2:
-    progress(count, num_lines, suffix='done')
-    count = count + 1
-    if count % 4 == 1:
+if str(file_type) == "fastq":
+    next(fh2)
+    print "K-merizing the reads..."
+    for line in fh2:
+        progress(count, num_lines, suffix='done')
+        count = count + 1
+        if count % 4 == 1:
 
-        # strip new line char
-        line = line.strip('\n')
+            # strip new line char
+            line = line.strip('\n')
 
-        # determine range of kmer
-        line_length = len(line)
-        kmer_range = line_length - int(kmer) + 1
+            # determine range of kmer
+            line_length = len(line)
+            kmer_range = line_length - int(kmer) + 1
 
-        # Starting kmer parsing 0 to length of line minus kmer size
-        for kmer_start_index in range(kmer_range):
+            # Starting kmer parsing 0 to length of line minus kmer size
+            for kmer_start_index in range(kmer_range):
 
-            # range for kmer
-            kmer_end_index = kmer_start_index + int(kmer)
+                # range for kmer
+                kmer_end_index = kmer_start_index + int(kmer)
 
-            # collect khmer for this iteraton
-            kmer_string = line[kmer_start_index: kmer_end_index]
+                # collect khmer for this iteraton
+                kmer_string = line[kmer_start_index: kmer_end_index]
 
-            # check for kmer in dictionary and ++ if not present add to dic and equal 1
-            kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+                # check for kmer in dictionary and ++ if not present add to dic and equal 1
+                kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
+elif file_type == "fasta":
+    for line in fh2:
+        progress(count, num_lines, suffix='done')
+        count = count + 1
+        if line[0] == ">":
+            next(line)
 
+            # strip new line char
+            line = line.strip('\n')
+
+            # determine range of kmer
+            line_length = len(line)
+            kmer_range = line_length - int(kmer) + 1
+
+            # Starting kmer parsing 0 to length of line minus kmer size
+            for kmer_start_index in range(kmer_range):
+
+                # range for kmer
+                kmer_end_index = kmer_start_index + int(kmer)
+
+                # collect khmer for this iteraton
+                kmer_string = line[kmer_start_index: kmer_end_index]
+
+                # check for kmer in dictionary and ++ if not present add to dic and equal 1
+                kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
 # khmer freq dictionary
 kmer_dic_freq = {}
 
