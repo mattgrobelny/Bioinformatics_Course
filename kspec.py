@@ -17,13 +17,13 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:x:f:t:")
 except getopt.GetoptError:
-    print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
+    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
         print "#--- K-mer frequency graphing script ---#\n"
         print "Usage:"
-        print 'kmer.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile> \n'
+        print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile> \n'
         print "Goals:"
         print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy"
         print "2) Output graph of kmer occurence frequnecy"
@@ -130,11 +130,11 @@ elif file_type == "fasta":
 
                 # collect khmer for this iteraton
                 kmer_string = line[kmer_start_index: kmer_end_index]
-
                 # check for kmer in dictionary and ++ if not present add to dic and equal 1
                 kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
             count += 1
             seq_total = ""
+
 
 # khmer freq dictionary
 kmer_dic_freq = {}
