@@ -17,7 +17,7 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hk:x:f:t:")
 except getopt.GetoptError:
-    print 'kmer.py -k <kmer_size> -x <x_axis_max> -f <inputfile>'
+    print 'kmer.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
