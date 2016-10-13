@@ -117,7 +117,7 @@ elif file_type == "fasta":
             line = line.strip('\n')
             seq_total = seq_total + line
             count += 1
-        if line[0] == ">":
+        elif line[0] == ">":
             # determine range of kmer
             line_length = len(seq_total)
             kmer_range = line_length - int(kmer) + 1
@@ -150,7 +150,7 @@ kmer_dic_freq = {}
 # count the number of count of kmers
 for val in kmer_dic.values():
     kmer_dic_freq[val] = kmer_dic_freq.get(val, 0) + 1
-    
+
 
 print " "
 print "#-----------------------------------------------------------------------#"
