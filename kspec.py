@@ -117,6 +117,7 @@ elif file_type == "fasta":
             line = line.strip('\n')
             seq_total = seq_total + line
             count += 1
+            continue
         elif line[0] == ">":
             # determine range of kmer
             line_length = len(seq_total)
@@ -134,6 +135,7 @@ elif file_type == "fasta":
                 kmer_dic[kmer_string] = kmer_dic.get(kmer_string, 0) + 1
             count += 1
             seq_total = ""
+            continue
 
 # Open file for writing
 file_out = "./%s_raw_kmer_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
