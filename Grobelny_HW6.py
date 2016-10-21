@@ -3,11 +3,14 @@ import sys
 import re
 import getopt
 import matplotlib
+matplotlib.use("Agg")  # Force matplotlib to not use any Xwindows backend.
+
+import matplotlib.pyplot as plt
 
 # default parameters
 file_name = ""
 kmer = ""
-output = velvethg_qc_out
+output = "velvethg_qc_out"
 stat_print = 0
 argv = sys.argv[1:]
 try:
@@ -58,15 +61,15 @@ for line in fh:
     line = line.strip('\n')
     if line[0] == ">":
         contig_data = re.findall(regex_pat, str(line))
-
+        kmer_len, kmer_cov = contig_data[0]
         # convert to contig physical length
-        contig_nuc_len = contig_data.group(0) * (kmer - 1)
+        contig_nuc_len = int(kmer_len) * (kmer - 1)
 
         # add contig length data to list
         contig_length_data.append(int(contig_nuc_len))
 
         # add contig cov data to list
-        contig_cov_data.append(float(contig_data.group(1)))
+        contig_cov_data.append(float(kmer_cov))
 
         # add one to contig count
         num_contigs += 1
@@ -109,7 +112,7 @@ if stat_print == 1:
     print "Total length of the genome across all contigs:", sumed_contig_length_data_sorted
 
     # -mean depth of coverage for the contigs
-    print "Mean depth of coverage:" float(sum(contig_cov_data)) / float(num_contigs)
+    print "Mean depth of coverage:", float(sum(contig_cov_data)) / float(num_contigs)
 
     # -N50 value of your assembly
     print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs) / int(2)):-1])
@@ -120,12 +123,12 @@ else:
 print "#--- Velvethg_qc: Contig Length Histogram ---#\n"
 print "Contig Length\tNumber of Contigs in this category"
 
-# printing histrogram of contig lengths 
+# printing histrogram of contig lengths
 for key in sorted(contig_len_dic.keys()):
-    print "%s\t%s" % (key, contig_len_dic[key])
+    print "%s\t%s\n" % (key, contig_len_dic[key])
 
 # Plot contig length distribution
-plt.plot(contig_len_dic.keys(), contig_len_dic.values())
+plt.bar(contig_len_dic.keys(), contig_len_dic.values())
 
 # Add labels
 plt.xlabel("Contig Size (bps)")
