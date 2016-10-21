@@ -6,9 +6,10 @@ import getopt
 # default parameters
 file_name = ""
 kmer = ""
+stat_print = 0
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hk:f:")
+    opts, args = getopt.getopt(argv, "hvk:f:")
 except getopt.GetoptError:
     print 'velvethg_qc.py -f <inputfile>'
     sys.exit(2)
@@ -26,6 +27,8 @@ for opt, arg in opts:
         sys.exit()
     elif opt in ("-k"):
         kmer = int(arg)
+    elif opt in ("-v"):
+        stat_print = 1
     elif opt in ("-f"):
         file_name = arg
 print "Input file:", file_name
@@ -45,6 +48,8 @@ contig_cov_data = []
 # pre compile pattern
 regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
 
+print "Calulating Assembly Quality Stats... "
+print " "
 # loop to collect kmer length and cov --> append each variable to its own list
 for line in fh:
     line = line.strip('\n')
@@ -64,20 +69,9 @@ for line in fh:
 
         # add one to contig count
         num_contigs += 1
+fh.close
 
-# Adjust the k-mer length to represent the physical length.
-# Calculate:
-# -the number of contigs
-# -the maximum contig length
-# -the mean contig length
-# -total length of the genome across all the contigs.
-# -mean depth of coverage for the contigs
-# -N50 value of your assembly
-
-# sort data
-contig_length_data_sorted = sorted(contig_length_data)
-contig_cov_data_sorted= sorted(contig_cov_data)
-
+# bin data
 # Distribution of contigs
 # Calculate the distribution of contig lengths,and bucket the contig lengths
 # into groups of 100bp. So, all contigs with lengths between 0 and 99 would be
@@ -85,3 +79,31 @@ contig_cov_data_sorted= sorted(contig_cov_data)
 
 # Convert lengths of contigs --> round and based on round assign to bin
 # Print distribution
+
+# sort data
+contig_length_data_sorted = sorted(contig_length_data)
+if stat_print == 1:
+    print "#--- Velveth Assembly Quality Stats ---# "
+    print " "
+    print "Stats for Assembly:", file_name
+
+    # -the number of contigs
+    print "Number of contigs:", num_contigs
+
+    # -the maximum contig length
+    print "Max contig length:", contig_length_data_sorted[-1]
+
+    # -the mean contig length
+    sumed_contig_length_data_sorted = sum(contig_length_data_sorted)
+    print "Mean contig length:", float(sumed_contig_length_data_sorted) / float(num_contigs)
+
+    # -total length of the genome across all the contigs.
+    print "Total length of the genome across all contigs:", sumed_contig_length_data_sorted
+
+    # -mean depth of coverage for the contigs
+    print "Mean depth of coverage:" float(sum(contig_cov_data)) / float(num_contigs)
+
+    # -N50 value of your assembly
+    print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs / 2):-1])
+else:
+    print "Stat print if off, but still printing graph..."
