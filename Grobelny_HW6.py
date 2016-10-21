@@ -1,4 +1,7 @@
 # Hw 6
+import sys
+import re
+import getopt
 
 # default parameters
 file_name = ""
@@ -25,11 +28,23 @@ for opt, arg in opts:
 print "Input file:", file_name
 print " "
 
-
+fh = open(file_name, 'r')
 # Requirements
 # Using Python regular expressions,extract k-mer length of each contig(in red below).
 # In addition, extract the k-mer coverage for the contig (in green).
 # >NODE_11_length_3717_cov_19.315845
+
+# pre compile pattern
+regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
+
+for line in fh:
+    line = line.strip('\n')
+    if line[0] == ">":
+        contig_data = re.findall(regex_pat, str(line))
+        kmer_len, kmer_cov = contig_data[0]
+        print "kmer length:", kmer_len
+        print "k-mer coverage", kmer_cov
+
 
 # Adjust the k-mer length to represent the physical length.
 # Calculate:
