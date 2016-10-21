@@ -28,7 +28,6 @@ for opt, arg in opts:
         print "2) Output stats based on contig length and coverage"
         print "3) Output histogram of contig lengths"
         print "\n"
-
         sys.exit()
     elif opt in ("-k"):
         kmer = int(arg)
@@ -42,17 +41,13 @@ print "Input file:", file_name
 print " "
 
 fh = open(file_name, 'r')
-# Requirements
-# Using Python regular expressions,extract k-mer length of each contig(in red below).
-# In addition, extract the k-mer coverage for the contig (in green).
-# >NODE_11_length_3717_cov_19.315845
 
 # count variables
 num_contigs = 0
 contig_length_data = []
 contig_cov_data = []
 
-# pre compile pattern
+# pre compile regex pattern
 regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
 
 print "Calulating Assembly Quality Stats... \n"
