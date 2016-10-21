@@ -7,10 +7,11 @@ import matplotlib
 # default parameters
 file_name = ""
 kmer = ""
+output = velvethg_qc_out
 stat_print = 0
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hvk:f:")
+    opts, args = getopt.getopt(argv, "hsk:f:n:")
 except getopt.GetoptError:
     print 'velvethg_qc.py -f <inputfile>'
     sys.exit(2)
@@ -18,7 +19,7 @@ for opt, arg in opts:
     if opt == '-h':
         print "#--- Velvethg_qc: Assembly Quality Script ---#\n"
         print "Usage:"
-        print 'velvethg_qc.py -k <kmerlength>-f <inputfile> \n'
+        print 'velvethg_qc.py -k <kmerlength> -s <stat_print>[1|0] -n <output> -f <inputfile> \n'
         print "Goals:"
         print ""
         print ""
@@ -28,8 +29,10 @@ for opt, arg in opts:
         sys.exit()
     elif opt in ("-k"):
         kmer = int(arg)
-    elif opt in ("-v"):
+    elif opt in ("-s"):
         stat_print = 1
+    elif opt in ("-n"):
+        output = str(arg)
     elif opt in ("-f"):
         file_name = arg
 print "Input file:", file_name
@@ -109,10 +112,19 @@ if stat_print == 1:
     print "Mean depth of coverage:" float(sum(contig_cov_data)) / float(num_contigs)
 
     # -N50 value of your assembly
-    print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs / 2):-1])
+    print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs) / int(2)):-1])
 else:
-    print "Stat print if off, but still printing graph..."
+    print "Stat print is off, but still printing graph..."
 
+
+print "#--- Velvethg_qc: Contig Length Histogram ---#\n"
+print "Contig Length\tNumber of Contigs in this category"
+
+# printing histrogram of contig lengths 
+for key in sorted(contig_len_dic.keys()):
+    print "%s\t%s" % (key, contig_len_dic[key])
+
+# Plot contig length distribution
 plt.plot(contig_len_dic.keys(), contig_len_dic.values())
 
 # Add labels
@@ -121,8 +133,7 @@ plt.ylabel("Counts")
 plt.title("Distribution of contigs")
 plt.grid(True)
 
-
-print "\nSaving Plot of: %s.png" % (file_n
-# Save first graph
-plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
+print "\nSaving Plot of: %s.png" % (output)
+# Save graph
+plt.savefig("%s.png" % (output))
 plt.close()
