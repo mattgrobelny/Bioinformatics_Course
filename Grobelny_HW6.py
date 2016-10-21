@@ -56,16 +56,14 @@ for line in fh:
     if line[0] == ">":
         contig_data = re.findall(regex_pat, str(line))
 
-        kmer_len, kmer_cov = contig_data[0]
-
         # convert to contig physical length
-        contig_nuc_len = kmer_len * (kmer - 1)
+        contig_nuc_len = contig_data.group(0) * (kmer - 1)
 
         # add contig length data to list
         contig_length_data.append(int(contig_nuc_len))
 
         # add contig cov data to list
-        contig_cov_data.append(float(kmer_cov))
+        contig_cov_data.append(float(contig_data.group(1)))
 
         # add one to contig count
         num_contigs += 1
