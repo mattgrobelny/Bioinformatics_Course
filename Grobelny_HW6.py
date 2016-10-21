@@ -2,6 +2,7 @@
 import sys
 import re
 import getopt
+import matplotlib
 
 # default parameters
 file_name = ""
@@ -15,7 +16,7 @@ except getopt.GetoptError:
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print "#--- Velveth Assembly Quality script ---#\n"
+        print "#--- Velvethg_qc: Assembly Quality Script ---#\n"
         print "Usage:"
         print 'velvethg_qc.py -k <kmerlength>-f <inputfile> \n'
         print "Goals:"
@@ -48,8 +49,7 @@ contig_cov_data = []
 # pre compile pattern
 regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
 
-print "Calulating Assembly Quality Stats... "
-print " "
+print "Calulating Assembly Quality Stats... \n"
 # loop to collect kmer length and cov --> append each variable to its own list
 for line in fh:
     line = line.strip('\n')
@@ -71,7 +71,7 @@ for line in fh:
         num_contigs += 1
 fh.close
 
-# bin data
+
 # Distribution of contigs
 # Calculate the distribution of contig lengths,and bucket the contig lengths
 # into groups of 100bp. So, all contigs with lengths between 0 and 99 would be
@@ -80,10 +80,17 @@ fh.close
 # Convert lengths of contigs --> round and based on round assign to bin
 # Print distribution
 
+contig_len_dic = {}
+
+for contig_len in contig_length_data:
+    # Bin data
+    bin_group = int(round(contig_len / 100)) * 100
+    contig_len_dic[bin_group] = contig_len_dic.get(bin_group, 0) + 1
+
 # sort data
 contig_length_data_sorted = sorted(contig_length_data)
 if stat_print == 1:
-    print "#--- Velveth Assembly Quality Stats ---# "
+    print "#--- Velvethg_qc: Assembly Quality Stats ---#\n"
     print " "
     print "Stats for Assembly:", file_name
 
