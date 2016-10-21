@@ -5,9 +5,10 @@ import getopt
 
 # default parameters
 file_name = ""
+kmer = ""
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hf:")
+    opts, args = getopt.getopt(argv, "hk:f:")
 except getopt.GetoptError:
     print 'velvethg_qc.py -f <inputfile>'
     sys.exit(2)
@@ -15,7 +16,7 @@ for opt, arg in opts:
     if opt == '-h':
         print "#--- Velveth Assembly Quality script ---#\n"
         print "Usage:"
-        print 'velvethg_qc.py -f <inputfile> \n'
+        print 'velvethg_qc.py -k <kmerlength>-f <inputfile> \n'
         print "Goals:"
         print ""
         print ""
@@ -23,6 +24,8 @@ for opt, arg in opts:
         print "\n"
 
         sys.exit()
+    elif opt in ("-k"):
+        kmer = int(arg)
     elif opt in ("-f"):
         file_name = arg
 print "Input file:", file_name
@@ -34,17 +37,33 @@ fh = open(file_name, 'r')
 # In addition, extract the k-mer coverage for the contig (in green).
 # >NODE_11_length_3717_cov_19.315845
 
+# count variables
+num_contigs = 0
+contig_length_data = []
+contig_cov_data = []
+
 # pre compile pattern
 regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
 
+# loop to collect kmer length and cov --> append each variable to its own list
 for line in fh:
     line = line.strip('\n')
     if line[0] == ">":
         contig_data = re.findall(regex_pat, str(line))
-        kmer_len, kmer_cov = contig_data[0]
-        print "kmer length:", kmer_len
-        print "k-mer coverage", kmer_cov
 
+        kmer_len, kmer_cov = contig_data[0]
+
+        # convert to contig physical length
+        contig_nuc_len = kmer_len * (kmer - 1)
+
+        # add contig length data to list
+        contig_length_data.append(int(contig_nuc_len))
+
+        # add contig cov data to list
+        contig_cov_data.append(float(kmer_cov))
+
+        # add one to contig count
+        num_contigs += 1
 
 # Adjust the k-mer length to represent the physical length.
 # Calculate:
@@ -54,6 +73,10 @@ for line in fh:
 # -total length of the genome across all the contigs.
 # -mean depth of coverage for the contigs
 # -N50 value of your assembly
+
+# sort data
+contig_length_data_sorted = sorted(contig_length_data)
+contig_cov_data_sorted= sorted(contig_cov_data)
 
 # Distribution of contigs
 # Calculate the distribution of contig lengths,and bucket the contig lengths
