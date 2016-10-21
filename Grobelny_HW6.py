@@ -114,3 +114,17 @@ if stat_print == 1:
     print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs / 2):-1])
 else:
     print "Stat print if off, but still printing graph..."
+
+plt.plot(contig_len_dic.keys(), contig_len_dic.values())
+
+# Add labels
+plt.xlabel("Contig Size (bps)")
+plt.ylabel("Counts")
+plt.title("Distribution of contigs")
+plt.grid(True)
+
+
+print "\nSaving Plot of: %s.png" % (file_n
+# Save first graph
+plt.savefig("/home/a-m/ib501_stud12/shell/dis_of_qual_at_base_%s.png" % (str(i)))
+plt.close()
