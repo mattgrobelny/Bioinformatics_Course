@@ -4,7 +4,8 @@ Backup of lecture notes, hws, scripts
 ## Best Scripts:
 - kspec.py  
 - knorm.py
-- ...
+- velvethg_qc.py  
+- ...  
 
 ----
 ### K-mer frequency graphing script
@@ -39,7 +40,7 @@ Output:
 ### Velvetg Output QC
 `velvethg_qc.py -h <help> -k <kmerlength> -s <stat_print_yes> -n <output_name> -f <inputfile> \n
 `  
-Goals:"
+Goals:"  
 1) Gather kmer contig length and coverage from fasta headers  
 2) Output stats based on contig length and coverage  
 3) Output histogram of contig lengths  
