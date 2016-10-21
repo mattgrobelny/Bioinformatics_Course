@@ -16,17 +16,17 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hsk:f:n:")
 except getopt.GetoptError:
-    print 'velvethg_qc.py -f <inputfile>'
+    print 'velvethg_qc.py -h <help> -k <kmerlength> -s <stat_print_yes> -n <output_name> -f <inputfile> \n'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
         print "#--- Velvethg_qc: Assembly Quality Script ---#\n"
         print "Usage:"
-        print 'velvethg_qc.py -k <kmerlength> -s <stat_print>[1|0] -n <output> -f <inputfile> \n'
+        print 'velvethg_qc.py -h <help> -k <kmerlength> -s <stat_print_yes> -n <output_name> -f <inputfile> \n'
         print "Goals:"
-        print ""
-        print ""
-        print ""
+        print "1) Gather kmer contig length and coverage from fasta headers"
+        print "2) Output stats based on contig length and coverage"
+        print "3) Output histogram of contig lengths"
         print "\n"
 
         sys.exit()
@@ -75,15 +75,10 @@ for line in fh:
         num_contigs += 1
 fh.close
 
-
 # Distribution of contigs
 # Calculate the distribution of contig lengths,and bucket the contig lengths
 # into groups of 100bp. So, all contigs with lengths between 0 and 99 would be
 # in the 0 bucket, those with lengths between 100 and 199 would be in the 100 bucket
-
-# Convert lengths of contigs --> round and based on round assign to bin
-# Print distribution
-
 contig_len_dic = {}
 
 for contig_len in contig_length_data:
@@ -93,16 +88,17 @@ for contig_len in contig_length_data:
 
 # sort data
 contig_length_data_sorted = sorted(contig_length_data)
+
 if stat_print == 1:
     print "#--- Velvethg_qc: Assembly Quality Stats ---#\n"
-    print " "
     print "Stats for Assembly:", file_name
 
     # -the number of contigs
     print "Number of contigs:", num_contigs
 
     # -the maximum contig length
-    print "Max contig length:", contig_length_data_sorted[-1]
+    max_contig = contig_length_data_sorted[-1]
+    print "Max contig length:", max_contig
 
     # -the mean contig length
     sumed_contig_length_data_sorted = sum(contig_length_data_sorted)
@@ -120,7 +116,7 @@ else:
     print "Stat print is off, but still printing graph..."
 
 
-print "#--- Velvethg_qc: Contig Length Histogram ---#\n"
+print "\n#--- Velvethg_qc: Contig Length Histogram ---#\n"
 print "Contig Length\tNumber of Contigs in this category"
 
 # printing histrogram of contig lengths
@@ -133,6 +129,7 @@ plt.bar(contig_len_dic.keys(), contig_len_dic.values())
 # Add labels
 plt.xlabel("Contig Size (bps)")
 plt.ylabel("Counts")
+plt.xscale('log')
 plt.title("Distribution of contigs")
 plt.grid(True)
 
