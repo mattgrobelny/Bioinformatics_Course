@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # ----------------QSUB Parameters----------------- #
 #PBS -S /bin/bash
@@ -8,27 +8,40 @@
 module load python/2.7.9
 # ----------------Your Commands------------------- #
 
-
-################################################################################
-# function to pass in assembly file and return stats
-get_stats(contigs_file_dir, kmer_size)
-{
-python velvethg_qc.py -k kmer_size -s 1 -f contigs_file_dir
-}
-
-
-################################################################################
-
 # collect list of assembly directories
-file_list=$(ls -1)
+file_list="velvetout_kmer_31
+velvetout_kmer_31_opts_min_contig_len_500
+velvetout_kmer_41
+velvetout_kmer_41_opts_min_contig_len_500
+velvetout_kmer_49
+velvetout_kmer_49_opts_4x
+velvetout_kmer_49_opts_4xmin_contig_len_500
+velvetout_kmer_49_opts_8x
+velvetout_kmer_49_opts_8xmin_contig_len_500
+velvetout_kmer_49_opts_auto
+velvetout_kmer_49_opts_automin_contig_len_500
+velvetout_kmer_49_opts_min_contig_len_500"
 
 stats_out="_velvetg_qc_stats.txt"
 slash="/"
-current_dir=$(pwd)
-for file in file_list
-do
-  working_dir=$current_dir$file
+contig_file="contigs.fa"
+current_dir="/home/a-m/ib501_stud12/shell/Grobelny_hw6_output"
+velvethg_qc="velvethg_qc.py"
 
-  kmer_size=$(echo file| grep -Eo "[0-9]+"| head -n 1)
-  get_stats($working_dir, $kmer_size) > $working_dir$slash$file$stats_out
+master_log_file_data="master_Log.txt"
+assembly_log_file="Log"
+echo "#----- Start of Velvet Log files ----# " > $current_dir$slash$master_log_file_data
+echo " " >> $current_dir$slash$master_log_file_data
+
+for file in $file_list
+do
+  working_dir=$current_dir$slash$file
+
+  kmer_size=$(echo $file| grep -Eo "[0-9]+"| head -n 1)
+  python $current_dir$slash$velvethg_qc -k $kmer_size -s 1 -f $working_dir$slash$contig_file > $working_dir$slash$file$stats_out
+
+  #collect last line of log file from each assembly
+  echo $file >> $current_dir$slash$master_log_file_data
+  tail -n 1 $working_dir$assembly_log_file >> $current_dir$slash$master_log_file_data
+  echo "" >> $current_dir$slash$master_log_file_data
 done
