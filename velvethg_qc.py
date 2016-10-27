@@ -86,27 +86,27 @@ contig_length_data_sorted = sorted(contig_length_data)
 
 if stat_print == 1:
     print "#--- Velvethg_qc: Assembly Quality Stats ---#\n"
-    print "Stats for Assembly:", file_name
+    print "Stats for Assembly:\t", file_name
 
     # -the number of contigs
-    print "Number of contigs:", num_contigs
+    print "Number of contigs:\t", num_contigs
 
     # -the maximum contig length
     max_contig = contig_length_data_sorted[-1]
-    print "Max contig length:", max_contig
+    print "Max contig length:\t", max_contig
 
     # -the mean contig length
     sumed_contig_length_data_sorted = sum(contig_length_data_sorted)
-    print "Mean contig length:", float(sumed_contig_length_data_sorted) / float(num_contigs)
+    print "Mean contig length:\t", float(sumed_contig_length_data_sorted) / float(num_contigs)
 
     # -total length of the genome across all the contigs.
-    print "Total length of the genome across all contigs:", sumed_contig_length_data_sorted
+    print "Total length of the genome across all contigs:\t", sumed_contig_length_data_sorted
 
     # -mean depth of coverage for the contigs
-    print "Mean depth of coverage:", float(sum(contig_cov_data)) / float(num_contigs)
+    print "Mean depth of coverage:\t", float(sum(contig_cov_data)) / float(num_contigs)
 
     # -N50 value of your assembly
-    print "N50 of assembly:", sum(contig_length_data_sorted[(int(num_contigs) / int(2)):-1])
+    print "N50 of assembly:\t", sum(contig_length_data_sorted[(int(num_contigs) / int(2)):-1])
 else:
     print "Stat print is off, but still printing graph..."
 
