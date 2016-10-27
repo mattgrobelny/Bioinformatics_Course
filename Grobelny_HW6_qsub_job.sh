@@ -10,6 +10,15 @@ module load velvet/1.2.10
 module load python/2.7.9
 # ----------------Your Commands------------------- #
 
+
+################################################################################
+get_stats(contigs_file_dir, kmer_size, )
+{
+velvethg_qc.py -k kmer_size -s 1 -n <output_name> -f <inputfile>
+}
+
+
+################################################################################
 files="/home/classroom/ib501/assembly/samples/rs_female_1983.13.1.fil.fq.gz
 /home/classroom/ib501/assembly/samples/rs_female_1983.13.2.fil.fq.gz"
 

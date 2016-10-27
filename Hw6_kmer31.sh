@@ -14,7 +14,7 @@ file1="/home/classroom/ib501/assembly/samples/rs_female_1983.13.1.fil.fq.gz"
 file2="/home/classroom/ib501/assembly/samples/rs_female_1983.13.2.fil.fq.gz"
 
 directory="/home/a-m/ib501_stud12/shell/Grobelny_hw6_output"
-outfile="/kmer_"
+outfile="/velvetout_kmer_"
 opts="_opts_"
 min_contig_len="500"
 min_contig_len_string="_Min_contig_len_500"
