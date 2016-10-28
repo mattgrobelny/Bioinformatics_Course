@@ -22,7 +22,7 @@ for opt, arg in opts:
     if opt == '-h':
         print "#--- Velvethg_qc: Assembly Quality Script ---#\n"
         print "Usage:"
-        print 'velvethg_qc.py -h <help> -k <kmerlength> -s <stat_print_yes> -n <output_name> -f <inputfile> \n'
+        print 'velvethg_qc.py -h <help> -k <kmerlength> -s <stat_print_yes>[0|1] -n <output_name> -f <inputfile> \n'
         print "Goals:"
         print "1) Gather kmer contig length and coverage from fasta headers"
         print "2) Output stats based on contig length and coverage"
@@ -50,7 +50,7 @@ contig_cov_data = []
 # pre compile regex pattern
 regex_pat = re.compile(r'^>NODE_\d+_length_(\d+)_cov_(\d+\.\d+)')
 
-print "Calulating Assembly Quality Stats... \n"
+#print "Calulating Assembly Quality Stats... \n"
 # loop to collect kmer length and cov --> append each variable to its own list
 for line in fh:
     line = line.strip('\n')
@@ -58,7 +58,7 @@ for line in fh:
         contig_data = re.findall(regex_pat, str(line))
         kmer_len, kmer_cov = contig_data[0]
         # convert to contig physical length
-        contig_nuc_len = int(kmer_len) * (kmer - 1)
+        contig_nuc_len = int(kmer_len) + (kmer - 1)
 
         # add contig length data to list
         contig_length_data.append(int(contig_nuc_len))
@@ -111,7 +111,7 @@ else:
     print "Stat print is off, but still printing graph..."
 
 
-print "\n#--- Velvethg_qc: Contig Length Histogram ---#\n"
+#print "\n#--- Velvethg_qc: Contig Length Histogram ---#\n"
 print "Contig Length\tNumber of Contigs in this category"
 
 # printing histrogram of contig lengths
@@ -125,10 +125,11 @@ plt.bar(contig_len_dic.keys(), contig_len_dic.values())
 plt.xlabel("Contig Size (bps)")
 plt.ylabel("Counts")
 plt.xscale('log')
+plt.yscale('log')
 plt.title("Distribution of contigs")
 plt.grid(True)
 
-print "\nSaving Plot of: %s.png" % (output)
+#print "\nSaving Plot of: %s.png" % (output)
 # Save graph
 plt.savefig("%s.png" % (output))
 plt.close()

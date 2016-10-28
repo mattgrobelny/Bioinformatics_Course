@@ -3,8 +3,10 @@
 # ----------------QSUB Parameters----------------- #
 #PBS -S /bin/bash
 #PBS -q classroom
-#PBS -l nodes=1:ppn=8,mem=12GB
-#PBS -N Velvet49_matt
+#PBS -l nodes=1:ppn=8,mem=10GB
+#PBS -N Velvet49
+#PBS -k oe
+
 # ----------------Load Modules-------------------- #
 #module load python/2.7.9
 module load velvet
@@ -18,39 +20,21 @@ outfile="/velvetout_kmer_"
 opts="_opts_"
 min_contig_len="500"
 min_contig_len_string="min_contig_len_500"
-#./velveth directory hash_length {[-file_format][-read_type][-separate|-interleaved] filename1 [filename2 ...]} {...} [options]
 
 kmer="49"
 options="-shortPaired -fastq.gz"
+cov="58"
+((ck=$cov*(100-$kmer+1)/100))
 mkdir $directory
-# compute standard parameters output
+
+# compute assembly standard parameters output
 dir_out_name=$directory$outfile$kmer
 mkdir $dir_out_name
 velveth $dir_out_name $kmer $options $file1 $file2
-velvetg $dir_out_name
+velvetg $dir_out_name -ins_length 500 -exp_cov $ck
 
-# compute standard parameters output w/ min contig len at 500
+# compute assembly standard parameters output w/ min contig len at 500
 dir_out_name=$directory$outfile$kmer$opts$min_contig_len_string
 mkdir $dir_out_name
 velveth $dir_out_name $kmer $options $file1 $file2
-velvetg $dir_out_name -min_contig_lgth 500
-
-kmer_49_options="4x
-8x
-auto"
-
-
-for kmer_opt in $kmer_49_options
-do
-  # compute standard parameters output
-  dir_out_name=$directory$outfile$kmer$opts$kmer_opt
-  mkdir $dir_out_name
-  velveth $dir_out_name $kmer $options $file1 $file2
-  velvetg $dir_out_name -cov_cutoff $kmer_opt
-
-  # compute standard parameters output w/ min contig len at 500
-  dir_out_name=$directory$outfile$kmer$opts$kmer_opt$min_contig_len_string
-  mkdir $dir_out_name
-  velveth $dir_out_name $kmer $options $file1 $file2
-  velvetg $dir_out_name -cov_cutoff $kmer_opt -min_contig_lgth 500
-done
+velvetg $dir_out_name -min_contig_lgth 500 -ins_length 500 -exp_cov $ck
