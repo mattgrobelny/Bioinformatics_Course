@@ -1,0 +1,158 @@
+==> master_Log.txt <==
+#----- Start of Velvet Log files ----# 
+
+==> velvetout_kmer_31_opts_min_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31_opts_min_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31_opts_min_contig_len_500/contigs.fa
+Number of contigs:	21326
+Max contig length:	9974
+Mean contig length:	951.607333771
+Total length of the genome across all contigs:	20293978
+Mean depth of coverage:	35.3518936089
+N50 of assembly:	13785951
+
+==> velvetout_kmer_31_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31/contigs.fa
+Number of contigs:	167544
+Max contig length:	9974
+Mean contig length:	232.19273743
+Total length of the genome across all contigs:	38902500
+Mean depth of coverage:	22.8982479417
+N50 of assembly:	33655093
+
+==> velvetout_kmer_41_opts_min_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_41_opts_min_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_41_opts_min_contig_len_500/contigs.fa
+Number of contigs:	20824
+Max contig length:	14174
+Mean contig length:	1145.62600845
+Total length of the genome across all contigs:	23856516
+Mean depth of coverage:	29.3688471654
+N50 of assembly:	17077612
+
+==> velvetout_kmer_41_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_41/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_41/contigs.fa
+Number of contigs:	109460
+Max contig length:	14174
+Mean contig length:	343.636561301
+Total length of the genome across all contigs:	37614458
+Mean depth of coverage:	20.4964206644
+N50 of assembly:	32923726
+
+==> velvetout_kmer_49_opts_cutoff_4_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_4/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_4/contigs.fa
+Number of contigs:	54576
+Max contig length:	25713
+Mean contig length:	632.352609206
+Total length of the genome across all contigs:	34511276
+Mean depth of coverage:	21.755292434
+N50 of assembly:	30712309
+
+==> velvetout_kmer_49_opts_cutoff_4min_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_4min_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_4min_contig_len_500/contigs.fa
+Number of contigs:	17644
+Max contig length:	25713
+Mean contig length:	1538.61278622
+Total length of the genome across all contigs:	27147284
+Mean depth of coverage:	24.4140528254
+N50 of assembly:	20755606
+
+==> velvetout_kmer_49_opts_cutoff_8_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_8/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_8/contigs.fa
+Number of contigs:	43045
+Max contig length:	25713
+Mean contig length:	748.342130329
+Total length of the genome across all contigs:	32212387
+Mean depth of coverage:	25.012441552
+N50 of assembly:	29061826
+
+==> velvetout_kmer_49_opts_cutoff_8min_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_8min_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_8min_contig_len_500/contigs.fa
+Number of contigs:	16353
+Max contig length:	25713
+Mean contig length:	1651.42328625
+Total length of the genome across all contigs:	27005725
+Mean depth of coverage:	25.285892791
+N50 of assembly:	20713585
+
+==> velvetout_kmer_49_opts_cutoff_auto_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_auto/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_auto/contigs.fa
+Number of contigs:	30097
+Max contig length:	25174
+Mean contig length:	975.512476327
+Total length of the genome across all contigs:	29359999
+Mean depth of coverage:	29.4596905717
+N50 of assembly:	26383498
+
+==> velvetout_kmer_49_opts_cutoff_automin_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_automin_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_cutoff_automin_contig_len_500/contigs.fa
+Number of contigs:	14168
+Max contig length:	25174
+Mean contig length:	1834.42468944
+Total length of the genome across all contigs:	25990129
+Mean depth of coverage:	26.6415964583
+N50 of assembly:	20114511
+
+==> velvetout_kmer_49_opts_min_contig_len_500_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_min_contig_len_500/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49_opts_min_contig_len_500/contigs.fa
+Number of contigs:	19648
+Max contig length:	17791
+Mean contig length:	1322.59517508
+Total length of the genome across all contigs:	25986350
+Mean depth of coverage:	24.7841403644
+N50 of assembly:	19220669
+
+==> velvetout_kmer_49_velvetg_qc_stats.txt <==
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_49/contigs.fa
+Number of contigs:	73122
+Max contig length:	17791
+Mean contig length:	495.339405377
+Total length of the genome across all contigs:	36220208
+Mean depth of coverage:	19.5067096751
+N50 of assembly:	31631530

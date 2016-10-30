@@ -20,7 +20,9 @@ opts="_opts_"
 min_contig_len_string="min_contig_len_500"
 
 kmer="41"
-cov="58"
+
+# Kmer Coverage 
+cov="58" # from Ck = C * (L − k + 1)/L
 ((ck=$cov*(100-$kmer+1)/100))
 
 options="-shortPaired -fastq.gz"
