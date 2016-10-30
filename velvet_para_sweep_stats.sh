@@ -19,6 +19,7 @@ velvetout_kmer_49_opts_cutoff_4min_contig_len_500
 velvetout_kmer_49_opts_cutoff_8
 velvetout_kmer_49_opts_cutoff_8min_contig_len_500
 velvetout_kmer_49_opts_cutoff_auto
+velvetout_kmer_49_opts_cutoff_automin_contig_len_500
 velvetout_kmer_49_opts_min_contig_len_500"
 
 stats_out="_velvetg_qc_stats.txt"
@@ -44,3 +45,6 @@ do
   tail -n 1 $working_dir$slash$assembly_log_file >> $current_dir$slash$master_log_file_data
   echo "" >> $current_dir$slash$master_log_file_data
 done
+
+--print-anyway
+a2ps -B -l 120 --print-anyway yes typescript_source -o - | ps2pdf - typescript_source.pdf
