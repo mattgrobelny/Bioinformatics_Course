@@ -6,7 +6,9 @@
 #PBS -l nodes=1:ppn=8,mem=10GB
 #PBS -N gmap_script
 # ----------------Load Modules-------------------- #
+
 module load gmap/2016-09-23
+
 # ----------------Your Commands------------------- #
 
 
