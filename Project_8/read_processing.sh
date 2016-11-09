@@ -35,7 +35,7 @@ module load stacks
 file_dir="/home/a-m/ib501_stud12/shell/stacks/clean/lane1/"
 barcodes="/home/a-m/ib501_stud12/shell/stacks/lane1_barcodes/"
 output="/home/a-m/ib501_stud12/shell/stacks/clean/samples/"
-process_radtags -p $file_dir -b $barcodes -o $output -e 'sbfI' -i 'gzfastq' -c -q -r
+# process_radtags -p $file_dir -b $barcodes -o $output -e 'sbfI' -i 'gzfastq' -c -q -r
 
 file_name_list=$(ls -1 /home/a-m/ib501_stud12/shell/stacks/clean/samples)
 num_start=1
