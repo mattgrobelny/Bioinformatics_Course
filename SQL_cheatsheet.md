@@ -52,8 +52,8 @@
 Syntax:
 ```
 CREATE TABLE
-  table (column1 type [[NOT] NULL] [AUTO_INCREMENT], column2 type [[NOT] NULL]
-  [AUTO_INCREMENT],  
+  table (column1 type [[NOT] NULL] [AUTO_INCREMENT],
+  column2 type [[NOT] NULL] [AUTO_INCREMENT],  
   ...  
   other options,  
   PRIMARY KEY (column(s)));   
@@ -103,7 +103,8 @@ INSERT INTO Students
   VALUES (123456789,'John','Smith');
 ```
 ```
-Insert/Select	INSERT INTO table (column1,column2,...)
+Insert/Select
+  INSERT INTO table (column1,column2,...)
   SELECT statement;
   (See below)	INSERT INTO Students
   (StudentID,FirstName,LastName)
@@ -114,14 +115,13 @@ Insert/Select	INSERT INTO table (column1,column2,...)
 ---
 ### Delete Data
 ```
-Delete data	DELETE FROM table
-  [WHERE condition(s)];
+Delete data
+DELETE FROM table [WHERE condition(s)];
 ```
 
 ```
 (Omit WHERE to delete all data)
-  DELETE FROM Students
-  WHERE LastName='Smith';
+  DELETE FROM Students WHERE LastName='Smith';
 ```
 ```
 DELETE FROM Students
@@ -156,12 +156,30 @@ Insert column	ALTER TABLE table ADD COLUMN
 ---
 ### Delete Data
 
-Delete column
+-Delete column
 ```
 DROP COLUMN column;
 ```
 
-Delete table (Careful!)
+-Delete table (Careful!)
 ```
 DROP TABLE [IF EXISTS] table;
+```
+
+---
+### Others  
+
+- Comments  
+```
+/* This is a comment */
+```
+
+- To determine what database is in use
+```
+select database();
+```
+
+- Rename a table
+```
+RENAME TABLE oldTablename TO nemTablename;
 ```
