@@ -48,74 +48,120 @@
 
 
 ## SQL Commands: Modifying
-| What?     | How?     | Example|
-| :------------- | :------------- | :------------- |   
-| Create table	| ```CREATE TABLE table (column1 type [[NOT] NULL] [AUTO_INCREMENT], column2 type [[NOT] NULL]
-                  [AUTO_INCREMENT],
-          ...
-          other options,
-          PRIMARY KEY (column(s))    );
+### Create table
+Syntax:
 ```
-        |
-        	CREATE TABLE Students (
-        LastName varchar(30) NOT NULL,
-        FirstName varchar(30) NOT NULL,
-        StudentID int NOT NULL,
-        Major varchar(20),
-        Dorm varchar(20),
-        PRIMARY KEY (StudentID)     );
+CREATE TABLE
+  table (column1 type [[NOT] NULL] [AUTO_INCREMENT], column2 type [[NOT] NULL]
+  [AUTO_INCREMENT],  
+  ...  
+  other options,  
+  PRIMARY KEY (column(s)));   
+```
+
+Example:  
+```
+CREATE TABLE Students (
+  LastName varchar(30) NOT NULL,
+  FirstName varchar(30) NOT NULL,
+  StudentID int NOT NULL,
+  Major varchar(20),
+  Dorm varchar(20),
+  PRIMARY KEY (StudentID)     );
+```
+---
+### Insert data:
+Syntax:
+```
 Insert data	INSERT INTO table VALUES
-        (list of values);
+  (list of values);
+```
+```
 INSERT INTO table SET
-        column1=value1,
-        column2=value2,
-        ...
-        columnk=valuek;
+  column1=value1,
+  column2=value2,
+  ...
+  columnk=valuek;
+```
+```
 INSERT INTO table (column1,column2,...)
-        VALUES (value1,value2...);	INSERT INTO Students VALUES
-        ('Smith','John',123456789,'Math','Selleck');
+  VALUES (value1,value2...);	INSERT INTO Students VALUES
+  ('Smith','John',123456789,'Math','Selleck');
+```
+Examples:
+```
 INSERT INTO Students SET
-        FirstName='John',
-        LastName='Smith',
-        StudentID=123456789,
-        Major='Math';
+  FirstName='John',
+  LastName='Smith',
+  StudentID=123456789,
+  Major='Math';
+```
+
+```
 INSERT INTO Students
-        (StudentID,FirstName,LastName)
-        VALUES (123456789,'John','Smith');
+  (StudentID,FirstName,LastName)
+  VALUES (123456789,'John','Smith');
+```
+```
 Insert/Select	INSERT INTO table (column1,column2,...)
-        SELECT statement;
-        (See below)	INSERT INTO Students
-        (StudentID,FirstName,LastName)
-        SELECT StudentID,FirstName,LastName
-        FROM OtherStudentTable;
-        WHERE LastName like '%son';
+  SELECT statement;
+  (See below)	INSERT INTO Students
+  (StudentID,FirstName,LastName)
+  SELECT StudentID,FirstName,LastName
+  FROM OtherStudentTable;
+  WHERE LastName like '%son';
+```
+---
+### Delete Data
+```
 Delete data	DELETE FROM table
-        [WHERE condition(s)];
+  [WHERE condition(s)];
+```
 
-
-
-(Omit WHERE to delete all data)	DELETE FROM Students
-        WHERE LastName='Smith';
+```
+(Omit WHERE to delete all data)
+  DELETE FROM Students
+  WHERE LastName='Smith';
+```
+```
 DELETE FROM Students
-        WHERE LastName like '%Smith%';
-        AND FirstName='John';
+  WHERE LastName like '%Smith%';
+  AND FirstName='John';
+```
+```
 DELETE FROM Students;
 Updating Data	UPDATE table SET
-        column1=value1,
-        column2=value2,
-        ...
-        columnk=valuek
-        [WHERE condition(s)];	UPDATE Students SET
-        LastName='Jones' WHERE
-        StudentID=987654321;
+  column1=value1,
+  column2=value2,
+  ...
+  columnk=valuek
+  [WHERE condition(s)];	UPDATE Students SET
+  LastName='Jones' WHERE
+  StudentID=987654321;
+```
+---
+### Update Data
+```
 UPDATE Students SET
-        LastName='Jones', Major='Theatre'
-        WHERE StudentID=987654321 OR
-        (MAJOR='Art' AND FirstName='Pete');
+  LastName='Jones', Major='Theatre'
+  WHERE StudentID=987654321 OR
+  (MAJOR='Art' AND FirstName='Pete');
+```
+```
 Insert column	ALTER TABLE table ADD COLUMN
-        column type options;	ALTER TABLE Students ADD COLUMN
-        Hometown varchar(20);
-Delete column	ALTER TABLE table
-        DROP COLUMN column;	ALTER TABLE Students
-        DROP COLUMN Dorm;
-Delete table (Careful!)	DROP TABLE [IF EXISTS] table;	DROP TABLE Animals;
+  column type options;	ALTER TABLE Students ADD COLUMN
+  Hometown varchar(20);
+```
+
+---
+### Delete Data
+
+Delete column
+```
+DROP COLUMN column;
+```
+
+Delete table (Careful!)
+```
+DROP TABLE [IF EXISTS] table;
+```
