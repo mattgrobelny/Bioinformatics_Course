@@ -183,3 +183,8 @@ select database();
 ```
 RENAME TABLE oldTablename TO nemTablename;
 ```
+- Export data to tsv
+```
+ mysql -u s12 -p -e "USE gene_db; SELECT gene_id , sequence, translation FROM transcript" > geneid_transcript_prot.tsv
+
+```
