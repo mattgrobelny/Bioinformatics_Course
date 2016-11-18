@@ -3,11 +3,12 @@
 # ----------------QSUB Parameters----------------- #
 #PBS -S /bin/bash
 #PBS -q classroom
-#PBS -l nodes=1:ppn=8,mem=10GB
+#PBS -l nodes=1:ppn=12,mem=20GB
 #PBS -N stacks_script
 # ----------------Load Modules-------------------- #
 
 module load stacks
+module load bwa
 
 # ------------------------------------------------ #
 
@@ -33,18 +34,42 @@ module load stacks
   # h: display this help messsage.
 
 file_dir="/home/a-m/ib501_stud12/shell/stacks/clean/lane1/"
-barcodes="/home/a-m/ib501_stud12/shell/stacks/lane1_barcodes/"
+barcodes="/home/a-m/ib501_stud12/shell/stacks/lane1_barcodes"
 output="/home/a-m/ib501_stud12/shell/stacks/clean/samples/"
-# process_radtags -p $file_dir -b $barcodes -o $output -e 'sbfI' -i 'gzfastq' -c -q -r
+#process_radtags -p $file_dir -b $barcodes -o $output -e 'sbfI' -i 'gzfastq' -c -q -r
+# done with process RAD-Tags
 
-file_name_list=$(ls -1 /home/a-m/ib501_stud12/shell/stacks/clean/samples)
-num_start=1
-indivdual="indv_"
-fq=".fq"
-for file_name in $file_name_list:
-do
-  #padded
-  num_stat=$(printf "%02d"$num_start)
-  mv $output$file_name $output$indivdual$num_start$fq
-  let 'num_start++'
-done
+#Based on the barcode file, how many samples were multiplexed together in this RAD library?
+# How many raw reads were there?
+# 16000000
+
+# How many were retained?
+# 12926707
+
+# Of those discarded, what were the reasons?
+# The discarded barcodes fell into these three categories.
+# 1 Ambiguous Barcodes - 920001
+# 2 Low Quality - 1472833
+# 3 Ambiguous RAD-Tag - 680459
+
+# file_name_list=$(ls -1 /home/a-m/ib501_stud12/shell/stacks/clean/samples)
+# num_start=1
+# indivdual="indv_"
+# fq=".fq"
+# for file_name in $file_name_list:
+# do
+#   #padded
+#   num_stat=$(printf "%02d"$num_start)
+#   mv $output$file_name $output$indivdual$num_start$fq
+#   let 'num_start++'
+# done
+
+###############################################################################
+bwa index -p sb -a bwtsw SB_ref.fasta
+
+# bwa mem [-aCHMpP] [-t nThreads] [-k minSeedLen] [-w bandWidth] [-d zDropoff]
+# [-r seedSplitRatio] [-c maxOcc] [-A matchScore] [-B mmPenalty] [-O gapOpenPen]
+# [-E gapExtPen] [-L clipPen] [-U unpairPen] [-R RGline] [-v verboseLevel]
+# db.prefix reads.fq [mates.fq]
+
+bwa mem -t 12 sb sb_reads.fa

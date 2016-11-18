@@ -1,0 +1,11 @@
+# HHM
+
+## What are HHM?
+
+- Probabilistic Models linking raw observation with abstract representation.
+- A combination of probabilities which represent the possible states modeling something
+
+HMM can link the variation in the amounts of protein and current state of the promoter.
+
+Finding hidden sequence of states
+--> s^T s= number of states and T= time ;; so state combos grow exp

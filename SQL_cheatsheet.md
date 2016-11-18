@@ -167,7 +167,7 @@ DROP TABLE [IF EXISTS] table;
 ```
 
 ---
-### Others  
+## Other Useful Functions  
 
 - Comments  
 ```
