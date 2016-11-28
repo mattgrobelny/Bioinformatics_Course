@@ -62,7 +62,7 @@ CREATE TABLE Blast_output
 (
 qseqid VARCHAR(225),
 sseqid VARCHAR(225),
-pident FLOAT(3,2),
+pident FLOAT,
 length INT,
 mismatch INT,
 gapopen INT,
@@ -80,3 +80,5 @@ LOAD DATA LOCAL INFILE '/home/grobeln2/gene_db_prot_vs_hsa_blast_out.tsv'
 INTO TABLE Blast_output
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
+
+SELECT * FROM [TABLE] LIMIT 10;

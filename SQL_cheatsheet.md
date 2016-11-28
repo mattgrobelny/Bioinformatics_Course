@@ -201,3 +201,14 @@ RENAME TABLE oldTablename TO nemTablename;
 ```
 SELECT * FROM [TABLE] LIMIT 10;
 ```
+
+- Copy a table from one database to another
+```
+CREATE TABLE db2.table LIKE db1.table;
+INSERT INTO db2.table SELECT * FROM db1.table;
+```
+
+- Select Unique rows
+```
+SELECT DISTINCT fieldName FROM tableName;
+```
