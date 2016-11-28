@@ -70,6 +70,15 @@ CREATE TABLE Students (
   PRIMARY KEY (StudentID)     );
 ```
 ---
+### Import local data:
+Example:
+```
+LOAD DATA LOCAL INFILE '/home/grobeln2/gene_db_prot_vs_hsa_blast_out.tsv'
+INTO TABLE Blast_output
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+```  
+---
 ### Insert data:
 Syntax:
 ```
@@ -186,4 +195,9 @@ RENAME TABLE oldTablename TO nemTablename;
 - Export data to tsv
 ```
  mysql -u s12 -p -e "USE gene_db; SELECT gene_id , sequence, translation FROM transcript" > geneid_transcript_prot.tsv
+```
+
+- Show first 10 rows  
+```
+SELECT * FROM [TABLE] LIMIT 10;
 ```
