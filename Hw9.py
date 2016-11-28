@@ -9,35 +9,47 @@ dbh_s12 = mysql.connector.connect(user='s12', password='jazzduck', database='s12
 cursor_s12 = dbh_s12.cursor()
 
 dbh_gene_db = mysql.connector.connect(user='s12', password='jazzduck', database='gene_db')
-cursor_gene_db= dbh_gene_db.cursor()
+cursor_gene_db = dbh_gene_db.cursor()
 
 # Set up queries for both DBs
 
-### Queries for DB S12
+###############################################################################
+# Queries for DB S12
 
 # Collect Unique blast hitting genes
-blast_hitting_genes_query = ("SELECT DISTINCT qseqid FROM s12.Blast_out;")
+blast_hitting_genes_query = ("SELECT DISTINCT qseqid FROM Blast_out;")
 
-query_blast_out = ("SELECT qseqid, sseqid, evalue"
-"FROM gene "
-"WHERE qseqid=%s and MIN(evalue)")
+query_blast_out = ("SELECT qseqid, sseqid, evalue FROM gene WHERE qseqid=%s AND MIN(evalue)")
 
-blast_hitting_genes_query_output = cursor.execute(blast_hitting_genes_query)
+blast_hitting_genes_query_output = cursor_s12.execute(blast_hitting_genes_query)
 
+###############################################################################
+# Queries for DB gene_db
+
+# Output transcript
+
+gene_id_to_actual_gene_id = ("SELECT gene_id FROM gene WHERE id=%s")
+
+transcript_seq_blast_hit = ("SELECT sequence FROM transcript WHERE gene_id=%s")
+
+
+###############################################################################
+
+print "# ----- Blast Output ----- #"
 
 for gene_id in blast_hitting_genes_query_output:
-    cursor.execute(query_blast_out, (gene_id))
+
+    # Print out actual gene id
+    print "Gene id:", cursor_gene_db.execute(gene_id_to_actual_gene_id, (gene_id))
+
+    # print out top blast hit
+    print cursor_s12.execute(query_blast_out, (gene_id))
+    print "Transcript:", cursor_gene_db.execute(transcript_seq_blast_hit, (gene_id))
 
 
+# Closes out connections
 cursor_s12.close()
 dbh_s12.close()
 
-
-# Execute the query.
-#
-# qseqid | sseqid | pident | length | mismatch | gapopen | qstart | qend | sstart | send | evalue | bitscore | blast_out_id |
-cursor.execute(query, ("17", 10000000))
-for (gene_id, chr, bp) in cursor:
-    print "Gene ID:", gene_id, "; Chromosome:", chr, "; start bp:", bp
-cursor.close()
-dbh.close()
+cursor_gene_db.close()
+dbh_gene_db.close()
