@@ -19,17 +19,17 @@ cursor_gene_db = dbh_gene_db.cursor()
 # Collect Unique blast hitting genes
 blast_hitting_genes_query = ("SELECT DISTINCT qseqid FROM Blast_out;")
 
-query_blast_out = ("SELECT qseqid, sseqid, evalue FROM gene WHERE qseqid=%s AND MIN(evalue)")
+query_blast_out = ("SELECT sseqid, evalue FROM gene WHERE qseqid=%s AND MIN(evalue)")
 
 blast_hitting_genes_query_output = cursor_s12.execute(blast_hitting_genes_query)
 
 ###############################################################################
 # Queries for DB gene_db
 
-# Output transcript
-
+# Covert to actual gene id
 gene_id_to_actual_gene_id = ("SELECT gene_id FROM gene WHERE id=%s")
 
+# Pull out transcript seq for specfic blast output
 transcript_seq_blast_hit = ("SELECT sequence FROM transcript WHERE gene_id=%s")
 
 
@@ -43,9 +43,8 @@ for gene_id in blast_hitting_genes_query_output:
     print "Gene id:", cursor_gene_db.execute(gene_id_to_actual_gene_id, (gene_id))
 
     # print out top blast hit
-    print cursor_s12.execute(query_blast_out, (gene_id))
+    print  "Blast hit:", cursor_s12.execute(query_blast_out, (gene_id))
     print "Transcript:", cursor_gene_db.execute(transcript_seq_blast_hit, (gene_id))
-
 
 # Closes out connections
 cursor_s12.close()
