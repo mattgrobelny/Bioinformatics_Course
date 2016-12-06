@@ -93,10 +93,10 @@ chr_size_dic = {'groupI'    : 28185914, 'groupII'   : 23295652, 'groupIII'   : 1
 viz_parameters = {'total_genome_size': int(sum(chr_size_dic.items())),
 'number_of_chr': 21,
 'degree_per_nuc': float((360 - int(viz_parameters['number_of_chr']))/ viz_parameters['total_genome_size']),
-'v' : 250,
+'rad_inner' : 250,
 'rad_outer': 300,
-'ring_gap' : 10,
-'arc_padding_in_degrees' : 1,
+'ring_gap': 10,
+'arc_padding_in_degrees': 1,
 'last_degree_end': 0,
 'ring_width': 25}
 
