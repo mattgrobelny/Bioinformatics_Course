@@ -1,7 +1,19 @@
 #HW 9 - SQL
+# accessing the db
+mysql -u s12 -p
+
+# pass: jazzduck
+
+# create  a gene id, seq and translation seq tsv
+USE gene_db;
+SELECT gene_id , sequence, translation
+FROM transcript INTO OUTFILE ‘/home/shell/geneid_transcript_prot.tsv’ ;
+FIELDS TERMINATED BY '\t' ;
+OPTIONALLY ENCLOSED BY '"' ;
+LINES TERMINATED BY '\n';
+
 #####
 # Convert tsv of geneid trans and prot seq to fasta
-
 
 #!/bin/bash
 #rm gene_db_trans_seq.fasta
@@ -33,31 +45,15 @@ do
         printf "$transl_seq_it\n" >> gene_db_prot_seq.fasta
 done
 
+# make blast db
+makeblastdb -in hsa.fa -parse_seqids -dbtype prot
 
-# accessing the db
-mysql -u s12 -p
+# run blastp of database genes agains the human gene protein seqeunces
+blastp -query gene_db_prot_seq.fasta -db hsa.fa -outfmt 6 -out gene_db_prot_vs_hsa_blast_out.tsv
 
-# pass: jazzduck
 
-USE gene_db;
-
-SELECT gene_id , sequence, translation
-FROM transcript INTO OUTFILE ‘/home/shell/geneid_transcript_prot.tsv’ ;
-FIELDS TERMINATED BY '\t' ;
-OPTIONALLY ENCLOSED BY '"' ;
-LINES TERMINATED BY '\n';
-
-# mysql -u s12 -p -e "USE gene_db SELECT gene_id,sequence,translation INTO OUTFILE '/home/shell/geneid_transcript_prot.tsv' FIELDS TERMINATED BY '\t' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM transcript;"
-
-# USE gene_db SELECT gene_id,sequence,translation INTO OUTFILE '/home/shell/geneid_transcript_prot.tsv' FIELDS TERMINATED BY '\t' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM transcript;"
-
-# Names of the 12 columns output by blast as: outfmt 6
-# qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore
-
-USE gene_db;
-
+# create a table to hold the blastout
 USE s12;
-
 CREATE TABLE Blast_output
 (
 qseqid VARCHAR(225),
@@ -76,9 +72,8 @@ blast_out_id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (blast_out_id)
 );
 
+# Import blast output file into s12 db
 LOAD DATA LOCAL INFILE '/home/grobeln2/gene_db_prot_vs_hsa_blast_out.tsv'
 INTO TABLE Blast_output
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
-
-SELECT * FROM [TABLE] LIMIT 10;
