@@ -17,7 +17,8 @@ cursor_gene_db = dbh_gene_db.cursor()
 # Collect Unique blast hitting genes
 blast_hitting_genes_query = ("SELECT DISTINCT qseqid FROM Blast_output")
 
-query_blast_out = ("SELECT sseqid, evalue FROM Blast_output WHERE qseqid=%s AND MIN(evalue)")
+# collect lowest evalue blast hit per gene
+query_blast_out = ("SELECT sseqid, evalue FROM Blast_output WHERE qseqid REGEXP "'%s'" ORDER BY evalue ASC LIMIT 1;")
 
 cursor_s12.execute(blast_hitting_genes_query)
 
@@ -37,19 +38,23 @@ transcript_seq_blast_hit = ("SELECT sequence FROM transcript WHERE gene_id=%s")
 ###############################################################################
 # ----- Blast Output ----- #
 
-print "Gene id", '\t', "Trans_id", '\t' "Blast hit", '\t', "E-value"'\t', "Transcript"
+print "Gene id", '\t', "Trans_id", '\t' "Blast hit", '\t', "E-value"', \t', "Transcript Seq"
 for gene_id in hits_gene_list[0:20]:
 
     # Query lowest evalue blast hit
-    cursor_s12.execute(query_blast_out, (gene_id[0],))
-    blast_hit = cursor_s12 # two outputs hit seq and eval
+    gene_to_search = '^' + str(gene_id[0])
+    cursor_s12.execute(query_blast_out, (gene_to_search,))
+    blast_hit = cursor_s12.fetchall()  # two outputs hit seq and eval
 
     # Query transcript
     cursor_gene_db.execute(transcript_seq_blast_hit, (gene_id[0],))
-    transcript_out = cursor_gene_db[0]
+    print cursor_gene_db.statment
+
+    transcript_out = cursor_gene_db.fetchall()
+    print transcript_out
 
     # output in tsv
-    print gene_id[0], '\t', gene_id[1], '\t', blast_hit[0], '\t', blast_hit[1], '\t', transcript_out[0]
+    #print gene_id[0], '\t', gene_id[1], '\t', blast_hit[0][0], '\t', blast_hit[0][1], '\t',# transcript_out[0][0]
 
 # Closes out connections
 cursor_s12.close()
