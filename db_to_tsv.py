@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import mysql.connector
 
+##
+# Create .fasta file for trans and prot seqs from gene_db database
+##
+
 ### Start up connection
 
 dbh_gene_db = mysql.connector.connect(user='s12', password='jazzduck', database='gene_db')
@@ -25,4 +29,4 @@ for line in cursor_gene_db:
 
 # close files
 fh_trn.close
-fh_prot_out.close
+fh_prt.close
