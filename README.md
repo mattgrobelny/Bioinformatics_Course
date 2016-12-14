@@ -18,7 +18,7 @@ Goals:
 3) Output kmer occurence frequnecy to .tsv file
 
 Output:  
-1) Graphs of kmer frequency vs number of Occurences
+1) Graphs of kmer frequency vs number of Occurences  
 2) Kmer occurence vs frequency output to file  
 
 ----
