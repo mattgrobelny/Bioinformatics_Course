@@ -14,18 +14,18 @@ file_name = ""
 xmax = 2000
 file_type = "fasta"
 bar_stat = 0
-output = "./"
+output_dir = "./"
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hpk:x:f:t:d:")
 except getopt.GetoptError:
-    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -d -f <inputfile>'
+    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -d <output_dir> -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
         print "#--- K-mer frequency graphing script ---#\n"
         print "Usage:"
-        print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -p[progress bar on] -f <inputfile> \n'
+        print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -p[progress bar on] -d <output_dir> [./] -f <inputfile> \n'
         print "Goals:"
         print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy"
         print "2) Output graph of kmer occurence frequnecy"
@@ -43,11 +43,14 @@ for opt, arg in opts:
         file_type = arg
     elif opt in ("-p"):
         bar_stat = 1
+    elif opt in ("-d"):
+        output_dir = arg
 print "Input file:", file_name
 print "Input file type:", file_type
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
 print "Progress Bar", bar_stat
+print "Output Dir:", output_dir
 print " "
 
 
@@ -144,7 +147,7 @@ elif file_type == "fasta":
             continue
 
 # Open file for writing
-file_out = "./%s_raw_kmer_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = str(output_dir) + "%s_raw_kmer_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
 fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer\tNumber of K-mers\n")
@@ -178,7 +181,7 @@ print " "
 print "#-----------------------------------------------------------------------#"
 
 # Open file for writing
-file_out = "./%s_kmer_freq_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = str(output_dir) + "%s_kmer_freq_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
 fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer Frequency\tNumber of K-mers in this category\n")
@@ -199,5 +202,5 @@ plt.grid(True)
 
 print "\nPrinting %s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer)
 # Save first graph
-plt.savefig("%s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer))
+plt.savefig(str(output_dir) + "%s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer))
 plt.close()
