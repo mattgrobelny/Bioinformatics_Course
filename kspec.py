@@ -14,11 +14,12 @@ file_name = ""
 xmax = 2000
 file_type = "fasta"
 bar_stat = 0
+output = "./"
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hk:x:f:t:p")
+    opts, args = getopt.getopt(argv, "hpk:x:f:t:d:")
 except getopt.GetoptError:
-    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile>'
+    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -d -f <inputfile>'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
@@ -182,7 +183,7 @@ fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer Frequency\tNumber of K-mers in this category\n")
 for key in sorted(kmer_dic_freq.keys()):
-    fh_out.write("%s\t%s\n" % (key, kmer_dic_freq[key]))
+    fh_out.write("%s\t%s\n" % (key, kmer_dic_freq[key]))ls
 fh_out.close
 
 # Ploting
