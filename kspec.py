@@ -14,6 +14,7 @@ file_name = ""
 xmax = 2000
 file_type = "fasta"
 bar_stat = 0
+bar_Y_N = "Off"
 output_dir = "./"
 argv = sys.argv[1:]
 try:
@@ -43,13 +44,14 @@ for opt, arg in opts:
         file_type = arg
     elif opt in ("-p"):
         bar_stat = 1
+        bar_Y_N = "On"
     elif opt in ("-d"):
         output_dir = arg
 print "Input file:", file_name
 print "Input file type:", file_type
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
-print "Progress Bar", bar_stat
+print "Progress Bar", bar_Y_N
 print "Output Dir:", output_dir
 print " "
 
