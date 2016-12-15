@@ -19,7 +19,7 @@ argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "hpk:x:f:t:d:")
 except getopt.GetoptError:
-    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -d <output_dir> -f <inputfile>'
+    print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -p[progress bar on] -d <output_dir> [./] -f <inputfile> \n'
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
