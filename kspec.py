@@ -180,9 +180,13 @@ for key in sorted(kmer_dic_freq.keys()):
 print " "
 print "#-----------------------------------------------------------------------#"
 
+file_name_out = file_name.split('/')
+file_name_split = file_name_out[-1]
+
 # Open file for writing
-file_out = str(output_dir) + "%s_kmer_freq_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = str(output_dir) + "%s_kmer_freq_data_Ksize_%s.tsv" % (file_name_split[:-6], kmer)
 fh_out = open(file_out, 'w')
+print "Writing to: file_out"
 
 fh_out.write("K-mer Frequency\tNumber of K-mers in this category\n")
 for key in sorted(kmer_dic_freq.keys()):
@@ -200,7 +204,7 @@ plt.title('Counts of the number of Kmer Occurences')
 plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=((int(xmax)- 489), 21))
 plt.grid(True)
 
-print "\nPrinting %s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer)
+print "\nPrinting %s_kmer_freq_hist_Ksize_%s.png" % (file_name_split[:-6], kmer)
 # Save first graph
-plt.savefig(str(output_dir) + "%s_kmer_freq_hist_Ksize_%s.png" % (file_name[:-6], kmer))
+plt.savefig(str(output_dir) + "%s_kmer_freq_hist_Ksize_%s.png" % (file_name_split[:-6], kmer))
 plt.close()
