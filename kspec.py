@@ -145,9 +145,14 @@ elif file_type == "fasta":
             count += 1
             seq_total = ""
             continue
+# procces file name
+file_name_out = file_name.split('/')
+print file_name_out
+file_name_split = file_name_out[-1]
+print file_name_split
 
 # Open file for writing
-file_out = str(output_dir) + "%s_raw_kmer_data_Ksize_%s.tsv" % (file_name[:-6], kmer)
+file_out = str(output_dir) + "%s_raw_kmer_data_Ksize_%s.tsv" % (file_name_split[:-6], kmer)
 fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer\tNumber of K-mers\n")
@@ -180,10 +185,7 @@ for key in sorted(kmer_dic_freq.keys()):
 print " "
 print "#-----------------------------------------------------------------------#"
 
-file_name_out = file_name.split('/')
-print file_name_out
-file_name_split = file_name_out[-1]
-print file_name_split
+
 # Open file for writing
 file_out = str(output_dir) + "%s_kmer_freq_data_Ksize_%s.tsv" % (file_name_split[:-6], kmer)
 fh_out = open(file_out, 'w')
