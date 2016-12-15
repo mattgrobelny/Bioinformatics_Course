@@ -47,6 +47,8 @@ for opt, arg in opts:
         bar_Y_N = "On"
     elif opt in ("-d"):
         output_dir = arg
+print "#-----------------------------------------------------------------------#"
+print "#--- K-mer frequency graphing script RUN PARAMETERS---#\n"
 print "Input file:", file_name
 print "Input file type:", file_type
 print "Kmer size:", kmer
