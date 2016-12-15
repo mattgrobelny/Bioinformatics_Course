@@ -13,9 +13,10 @@ kmer = 11
 file_name = ""
 xmax = 2000
 file_type = "fasta"
+bar_stat = 0
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "hk:x:f:t:")
+    opts, args = getopt.getopt(argv, "hk:x:f:t:p")
 except getopt.GetoptError:
     print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile>'
     sys.exit(2)
@@ -23,7 +24,7 @@ for opt, arg in opts:
     if opt == '-h':
         print "#--- K-mer frequency graphing script ---#\n"
         print "Usage:"
-        print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -f <inputfile> \n'
+        print 'kspec.py -k <kmer_size> -x <x_axis_max> -t <type>[fasta|fastq] -p[progress bar on] -f <inputfile> \n'
         print "Goals:"
         print "1) Take in fastq file and kmerize it and output kmer occurence frequnecy"
         print "2) Output graph of kmer occurence frequnecy"
@@ -39,10 +40,13 @@ for opt, arg in opts:
         file_name = arg
     elif opt in ("-t"):
         file_type = arg
+    elif opt in ("-p"):
+        bar_stat = 1
 print "Input file:", file_name
 print "Input file type:", file_type
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
+print "Progress Bar", bar_stat
 print " "
 
 
@@ -86,7 +90,8 @@ kmer_range = 0
 if str(file_type) == "fastq":
     print "K-merizing the reads..."
     for line in fh2:
-        progress(count, num_lines, suffix='done')
+        if bar_stat == 1:
+            progress(count, num_lines, suffix='done')
         count = count + 1
         if count % 4 == 1:
 
@@ -111,7 +116,8 @@ if str(file_type) == "fastq":
 
 elif file_type == "fasta":
     for line in fh2:
-        progress(count, num_lines, suffix='done')
+        if bar_stat == 1:
+            progress(count, num_lines, suffix='done')
         if line[0] != ">":
             line = line.strip('\n')
             print "printing line:", line
