@@ -147,9 +147,8 @@ elif file_type == "fasta":
             continuecd
 # procces file name
 file_name_out = file_name.split('/')
-print file_name_out
 file_name_split = file_name_out[-1]
-print file_name_split
+
 
 # Open file for writing
 file_out = str(output_dir) + "%s_raw_kmer_data_Ksize_%s.tsv" % (file_name_split[:-6], kmer)
