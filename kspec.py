@@ -51,7 +51,7 @@ print "Input file:", file_name
 print "Input file type:", file_type
 print "Kmer size:", kmer
 print "X-axis max kmer count:", xmax
-print "Progress Bar", bar_Y_N
+print "Progress Bar:", bar_Y_N
 print "Output Dir:", output_dir
 print " "
 
