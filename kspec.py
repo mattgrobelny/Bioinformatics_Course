@@ -207,7 +207,7 @@ plt.title('Counts of the number of Kmer Occurences')
 plt.annotate('K-mer size = %s' % (kmer), xy=(1, 3), xytext=((int(xmax)- 489), 21))
 plt.grid(True)
 
-print "\nPrinting to %s%s_kmer_freq_hist_Ksize_%s.png" % (,output_dir, file_name_split[:-6], kmer)
+print "\nPrinting to %s%s_kmer_freq_hist_Ksize_%s.png" % (output_dir, file_name_split[:-6], kmer)
 # Save first graph
 plt.savefig(str(output_dir) + "%s_kmer_freq_hist_Ksize_%s.png" % (file_name_split[:-6], kmer))
 plt.close()
