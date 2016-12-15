@@ -120,14 +120,12 @@ elif file_type == "fasta":
             progress(count, num_lines, suffix='done')
         if line[0] != ">":
             line = line.strip('\n')
-            print "printing line:", line
             seq_total = seq_total + line
             count += 1
             continue
         elif line[0] == ">":
             # determine range of kmer
             line_length = len(seq_total)
-            print "determine kmer", seq_total
             kmer_range = line_length - int(kmer) + 1
 
             # Starting kmer parsing 0 to length of line minus kmer size

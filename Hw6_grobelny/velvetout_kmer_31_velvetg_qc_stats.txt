@@ -1,0 +1,128 @@
+Input file: /home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31/contigs.fa
+ 
+#--- Velvethg_qc: Assembly Quality Stats ---#
+
+Stats for Assembly:	/home/a-m/ib501_stud12/shell/Grobelny_hw6_output/velvetout_kmer_31/contigs.fa
+Number of contigs:	167544
+Max contig length:	9974
+Mean contig length:	232.19273743
+Total length of the genome across all contigs:	38902500
+Mean depth of coverage:	22.8982479417
+N50 of assembly:	33655093
+Contig Length	Number of Contigs in this category
+0	99721
+
+100	19636
+
+200	9488
+
+300	8254
+
+400	9119
+
+500	5433
+
+600	3392
+
+700	2461
+
+800	1922
+
+900	1460
+
+1000	1243
+
+1100	979
+
+1200	753
+
+1300	646
+
+1400	527
+
+1500	417
+
+1600	312
+
+1700	284
+
+1800	225
+
+1900	211
+
+2000	169
+
+2100	111
+
+2200	116
+
+2300	94
+
+2400	91
+
+2500	68
+
+2600	49
+
+2700	62
+
+2800	35
+
+2900	42
+
+3000	29
+
+3100	30
+
+3200	24
+
+3300	15
+
+3400	21
+
+3500	14
+
+3600	14
+
+3700	10
+
+3800	9
+
+3900	8
+
+4000	4
+
+4100	7
+
+4200	5
+
+4300	3
+
+4400	4
+
+4500	4
+
+4600	5
+
+4700	3
+
+4900	3
+
+5100	2
+
+5300	2
+
+5400	2
+
+5600	1
+
+5700	1
+
+5900	1
+
+7600	1
+
+8200	1
+
+9900	1
+

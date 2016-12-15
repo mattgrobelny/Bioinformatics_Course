@@ -1,0 +1,12 @@
+# SQL Cheat sheet
+
+log in
+# What	How	Example(s)
+List all databases	SHOW DATABASES;	SHOW DATABASES;
+Create database	CREATE DATABASE database;	CREATE DATABASE PhoneDB;
+Use a database	USE database;	USE PhonDB;
+List tables in the database	SHOW TABLES;	SHOW TABLES;
+Show the structure of a table	DESCRIBE table;
+SHOW COLUMNS FROM table;	DESCRIBE Animals;
+SHOW COLUMNS FROM Animals;
+Delete a database (Careful!)	DROP DATABASE database;	DROP DATABASE PhoneDB;
