@@ -183,7 +183,7 @@ fh_out = open(file_out, 'w')
 
 fh_out.write("K-mer Frequency\tNumber of K-mers in this category\n")
 for key in sorted(kmer_dic_freq.keys()):
-    fh_out.write("%s\t%s\n" % (key, kmer_dic_freq[key]))ls
+    fh_out.write("%s\t%s\n" % (key, kmer_dic_freq[key]))
 fh_out.close
 
 # Ploting
