@@ -181,8 +181,9 @@ print " "
 print "#-----------------------------------------------------------------------#"
 
 file_name_out = file_name.split('/')
+print file_name_out
 file_name_split = file_name_out[-1]
-
+print file_name_split
 # Open file for writing
 file_out = str(output_dir) + "%s_kmer_freq_data_Ksize_%s.tsv" % (file_name_split[:-6], kmer)
 fh_out = open(file_out, 'w')
