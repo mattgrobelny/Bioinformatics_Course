@@ -161,7 +161,14 @@ Insert column	ALTER TABLE table ADD COLUMN
   column type options;	ALTER TABLE Students ADD COLUMN
   Hometown varchar(20);
 ```
+```
+Insert data into a table
 
+INSERT INTO table 
+(column1,column2, ... )
+VALUES
+(value1, value2, ...);
+```
 ---
 ### Delete Data
 
