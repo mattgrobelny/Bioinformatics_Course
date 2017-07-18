@@ -183,6 +183,17 @@ DROP TABLE [IF EXISTS] table;
 ```
 
 ---
+## Alter a Table
+
+Add a column to table, make it an auto incrementing int placing the column first.
+Also make the column a primary key. 
+```
+ALTER TABLE my_contacts
+ADD COLUMN contacts_id INT NOT NULL AUTO_INCREMENT FIRST, 
+ADD PRIMARY KEY (contacts_id);
+```
+
+---
 ## Other Useful Functions  
 
 - Comments  
