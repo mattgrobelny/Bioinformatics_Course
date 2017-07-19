@@ -216,13 +216,19 @@ CHANGE COLUMN decription_info project_details VARCHAR(100)
 CHANGE COLUMN job con_name VARCHAR(30);
 ```
 
-### Change column type
+### Change column type  
 
 ```
 ALTER TABLE project_list
-MODIFY COLUMN project_details BLOB
+MODIFY COLUMN project_details BLOB; # new column type here
 ```
 
+### Delete column  
+
+```
+ALTER TABLE project_list
+DROP COLUMN project_details;
+```
 ---
 ## Other Useful Functions  
 
