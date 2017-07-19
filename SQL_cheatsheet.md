@@ -257,10 +257,10 @@ CASE
   END AS 'South America'
 FROM Country;
 
-```
+```  
 
----
-## Flow Control
+---  
+## Foreign key
 Creating  a table with a foreign key
 ```
 CREATE TABLE interests(
@@ -271,9 +271,9 @@ CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id)
 REFERNCES my_contacts (contacts_id) # where the FK references to 
 );
 
-```  
+```    
 
----
+---  
 ## Other Useful Functions  
 
 - Comments  
