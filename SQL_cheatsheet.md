@@ -260,6 +260,20 @@ FROM Country;
 ```
 
 ---
+## Flow Control
+Creating  a table with a foreign key
+```
+CREATE TABLE interests(
+int_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+interest VARCHAR(50) NOT NULL,
+contact_id INT NOT NULL,
+CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id)
+REFERNCES my_contacts (contacts_id) # where the FK references to 
+);
+
+```  
+
+---
 ## Other Useful Functions  
 
 - Comments  
