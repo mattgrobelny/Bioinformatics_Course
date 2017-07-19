@@ -191,6 +191,36 @@ Also make the column a primary key.
 ALTER TABLE my_contacts
 ADD COLUMN contacts_id INT NOT NULL AUTO_INCREMENT FIRST, 
 ADD PRIMARY KEY (contacts_id);
+```  
+
+### Change name of table  
+
+```
+ALTER TABLE projects
+RENAME TO project_list;
+```  
+
+### Change column to Auto-incrementing values
+
+```
+ALTER TABLE project_list
+CHANGE COLUMN number project_id INT NOT NULL AUTO_INCREMENT
+ADD PRIMARY KEY (project_id);
+```
+
+### Change two columns to Auto-incrementing values
+
+```
+ALTER TABLE project_list
+CHANGE COLUMN decription_info project_details VARCHAR(100)
+CHANGE COLUMN job con_name VARCHAR(30);
+```
+
+### Change column type
+
+```
+ALTER TABLE project_list
+MODIFY COLUMN project_details BLOB
 ```
 
 ---
