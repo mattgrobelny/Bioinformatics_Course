@@ -229,6 +229,36 @@ MODIFY COLUMN project_details BLOB; # new column type here
 ALTER TABLE project_list
 DROP COLUMN project_details;
 ```
+
+---
+## Flow Control
+
+```
+Output into a table. 
+
+SELECT ISO,
+CASE 
+    WHEN ISO = 'BT' THEN Population
+    ELSE ''
+  END AS 'Asia', # using END AS outputs all TRUE conditionals to be under the column its labeled as 
+CASE 
+    WHEN ISO = 'DE' THEN Population
+    ELSE ''
+  END AS 'Europe',
+CASE 
+    WHEN ISO = 'CA' THEN Population
+    WHEN ISO = 'MX' THEN Population
+    ELSE ''
+  END AS 'North America',
+CASE 
+    WHEN ISO = 'AR' THEN Population
+    WHEN ISO = 'BR' THEN Population
+    ELSE ''
+  END AS 'South America'
+FROM Country;
+
+```
+
 ---
 ## Other Useful Functions  
 
