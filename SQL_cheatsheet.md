@@ -291,6 +291,23 @@ CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id)
 REFERNCES my_contacts (contacts_id) # where the FK references to 
 );
 ```    
+
+---  
+## Joining
+Join data from multiple tables
+```
+SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingredients_table3
+INNER JOIN Cooking_Dir_Table 
+ON
+ingredients_table3.Dir_usage_key_fk = Cooking_Dir_Table.Dir_id_key; # where values equals
+```    
+
+```
+SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingredients_table3
+INNER JOIN Cooking_Dir_Table 
+ON
+ingredients_table3.Dir_usage_key_fk <> Cooking_Dir_Table.Dir_id_key;  # where values do not equal
+
 ---  
 ## Other Useful Functions  
 
