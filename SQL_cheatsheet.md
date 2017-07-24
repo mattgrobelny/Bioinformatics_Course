@@ -347,6 +347,13 @@ INSERT INTO db2.table SELECT * FROM db1.table;
 SELECT DISTINCT fieldName FROM tableName;
 ```
 
+- Select only duplicate rows and count them 
+```
+SELECT COUNT(state) as numberOfcustomers FROM Customers
+WHERE state IN (Select state FROM Customers 
+GROUP BY state 
+HAVING COUNT(state) > 1);```
+
 - Table Aliases
 
 ```
