@@ -329,9 +329,10 @@ INSERT INTO db2.table SELECT * FROM db1.table;
 SELECT DISTINCT fieldName FROM tableName;
 ```
 
-- Table Aliases (Select profession AS mc_prof)
+- Table Aliases
 
 ```
+Select profession AS mc_prof
 FROM my_contacts AS mc 
 GROUP BY mc_prof
 ORDER BY mc_prof
