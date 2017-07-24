@@ -127,8 +127,8 @@ Insert/Select
   WHERE LastName like '%son';
 ```
 ---  
-## Create, Select and Insert at the same time
-Creating  a table with a foreign key
+
+### Create, Select and Insert at the same time
 ```
 CREATE TABLE interests
 (
@@ -327,4 +327,12 @@ INSERT INTO db2.table SELECT * FROM db1.table;
 - Select Unique rows
 ```
 SELECT DISTINCT fieldName FROM tableName;
+```
+
+- Table Aliases (Select profession AS mc_prof)
+
+```
+FROM my_contacts AS mc 
+GROUP BY mc_prof
+ORDER BY mc_prof
 ```
