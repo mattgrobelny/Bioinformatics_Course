@@ -307,7 +307,8 @@ SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingr
 INNER JOIN Cooking_Dir_Table 
 ON
 ingredients_table3.Dir_usage_key_fk <> Cooking_Dir_Table.Dir_id_key;  # where values do not equal
-
+```
+Useful to identify which combinations are absent 
 ---  
 ## Other Useful Functions  
 
