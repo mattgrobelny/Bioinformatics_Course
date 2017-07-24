@@ -85,6 +85,7 @@ Syntax:
 Insert data	INSERT INTO table VALUES
   (list of values);
 ```
+
 ```
 INSERT INTO table SET
   column1=value1,
@@ -92,11 +93,13 @@ INSERT INTO table SET
   ...
   columnk=valuek;
 ```
+
 ```
 INSERT INTO table (column1,column2,...)
   VALUES (value1,value2...);	INSERT INTO Students VALUES
   ('Smith','John',123456789,'Math','Selleck');
 ```
+
 Examples:
 ```
 INSERT INTO Students SET
