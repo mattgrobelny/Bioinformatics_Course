@@ -111,6 +111,8 @@ INSERT INTO Students
   (StudentID,FirstName,LastName)
   VALUES (123456789,'John','Smith');
 ```
+
+---
 ```
 Insert/Select
   INSERT INTO table (column1,column2,...)
@@ -121,6 +123,21 @@ Insert/Select
   FROM OtherStudentTable;
   WHERE LastName like '%son';
 ```
+---  
+## Create, Select and Insert at the same time
+Creating  a table with a foreign key
+```
+CREATE TABLE interests
+(
+int_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+interest VARCHAR(50) NOT NULL,
+contact_id INT NOT NULL,
+)
+
+AS
+SELECT some_field FROM my_contacts;
+```    
+
 ---
 ### Delete Data
 ```
@@ -270,9 +287,7 @@ contact_id INT NOT NULL,
 CONSTRAINT my_contacts_contact_id_fk FOREIGN KEY (contact_id)
 REFERNCES my_contacts (contacts_id) # where the FK references to 
 );
-
 ```    
-
 ---  
 ## Other Useful Functions  
 
