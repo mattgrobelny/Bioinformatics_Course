@@ -293,7 +293,7 @@ REFERNCES my_contacts (contacts_id) # where the FK references to
 ```    
 
 ---  
-## Joining
+## Joining - INNER JOIN
 Join data from multiple tables
 ```
 SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingredients_table3
@@ -302,13 +302,34 @@ ON
 ingredients_table3.Dir_usage_key_fk = Cooking_Dir_Table.Dir_id_key; # where values equals
 ```    
 
+Useful to identify which combinations are absent 
+
 ```
 SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingredients_table3
 INNER JOIN Cooking_Dir_Table 
 ON
 ingredients_table3.Dir_usage_key_fk <> Cooking_Dir_Table.Dir_id_key;  # where values do not equal
 ```
-Useful to identify which combinations are absent 
+
+---  
+## Joining - OUTER JOIN
+```
+Select car, brand FROM cars_table a
+LEFT OUTER JOIN cars_wishlist b
+on acar_engine = b.car_engine
+```
+
+---  
+## Joining - UNION combine data from multiple tables, ignoring duplicates 
+```
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listing
+ORDER BY title;
+```
+Use UNION ALL to include duplicates 
 ---  
 ## Other Useful Functions  
 
