@@ -342,15 +342,7 @@ UNION
 SELECT title FROM job_listing;
 ```
 
----  
-## Other Useful Functions  
-
-- Comments  
-```
-/* This is a comment */
-```
-
-- Views -  saving queries within the database
+### Views -  saving queries within the database
 ```
 CREATE VIEW car_wishlist_query AS 
 SELECT name, car, brand FROM car_table a
@@ -361,6 +353,19 @@ WHERE a.engine = b.engine;
 Using VIEWS
 ```
 SELECT * FROM car_wishlist_query;
+```
+
+Delete VIEWS
+```
+DROP VIEW car_wishlist_query;
+```
+
+---  
+## Other Useful Functions  
+
+- Comments  
+```
+/* This is a comment */
 ```
 
 - To determine what database is in use
