@@ -350,6 +350,19 @@ SELECT title FROM job_listing;
 /* This is a comment */
 ```
 
+- Views -  saving queries within the database
+```
+CREATE VIEW car_wishlist_query AS 
+SELECT name, car, brand FROM car_table a
+NATURAL JOIN car_wishlist b
+WHERE a.engine = b.engine;
+```
+
+Using VIEWS
+```
+SELECT * FROM car_wishlist_query;
+```
+
 - To determine what database is in use
 ```
 select database();
@@ -359,6 +372,15 @@ select database();
 ```
 RENAME TABLE oldTablename TO nemTablename;
 ```
+
+- Checks 
+```
+CREATE TABLE piggy_band
+(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+coin CHAR(1) CHECK ( coin IN ('P','N','D','Q'));
+
+```
+
 - Export data to tsv
 ```
  mysql -u s12 -p -e "USE gene_db; SELECT gene_id , sequence, translation FROM transcript" > geneid_transcript_prot.tsv
