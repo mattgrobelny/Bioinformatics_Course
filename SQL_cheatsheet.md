@@ -361,6 +361,25 @@ DROP VIEW car_wishlist_query;
 ```
 
 ---  
+### Transactions
+```
+START TRANSACTION; # start recording commands
+INSERT INTO cars_table(brands, models)
+VALUES
+(Subaru,impreza);
+ROLLBACK; # roll back commands to the start of last transaction
+```
+
+```
+START TRANSACTION; # start recording commands
+INSERT INTO cars_table(brands, models)
+VALUES
+(Subaru,impreza);
+COMMIT; # save/apply the commands upto the start of last transaction
+```
+
+
+---  
 ## Other Useful Functions  
 
 - Comments  
