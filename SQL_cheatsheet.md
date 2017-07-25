@@ -381,33 +381,34 @@ COMMIT; # save/apply the commands upto the start of last transaction
 ## Procedures
 
 ```
-DELIMITER $$ # prep delimer for where the procedure will end 
+DROP PROCEDURE IF EXISTS show_ingredients;
 
-CREATE PROCEDURE show_ingredients # procedure name
-( 
+# prep delimer for where the procedure will end 
+DELIMITER // 
+
+CREATE PROCEDURE show_ingredients( 
 IN recipe_to_output VARCHAR(50) , # 'apple cake', 'baked ziti','italian seasoning','spaghetti sauce','tea biscuits'
 IN recipe_size_adjust FLOAT(2,1) # input recipe size adj 1.0 = 100%, 1.5 = 150% of orignal recipe size
 )  
 
 BEGIN
+	SELECT 
+	a.recipe_name, 
+	a.serves_num * recipe_size_adjust AS serving_size,
+	a.serves_units,
+	c.ingredient_name,
+	b.amount * recipe_size_adjust AS amount,
+	b.units,
+	a.directions 
 
-SELECT 
-a.recipe_name, 
-a.serves_num * recipe_size_adjust AS serving_size,
-a.serves_units,
-c.ingredient_name,
-b.amount * recipe_size_adjust AS amount,
-b.units,
-a.directions 
+	FROM recipes_table a
 
-FROM recipes_table a
+	JOIN r_i_Relation b ON a.recipe_id_key = b.recipe_id_key2
+	JOIN ingredients_table c ON c.ingredients_id_key = b.ingredients_id_key2
 
-JOIN r_i_Relation b ON a.recipe_id_key = b.recipe_id_key2
-JOIN ingredients_table c ON c.ingredients_id_key = b.ingredients_id_key2
+	WHERE a.recipe_name = recipe_to_output;
 
-WHERE a.recipe_name = recipe_to_output;
-
-END $$; # use previous delimiter to end storage of procedure 
+END // # use previous delimiter to end storage of procedure 
 DELIMITER ;
 
 CALL show_ingredients('apple cake', 1.5); # (recipe_name, adj_parameter)
