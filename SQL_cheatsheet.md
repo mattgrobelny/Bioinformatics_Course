@@ -250,8 +250,8 @@ ALTER TABLE project_list
 DROP COLUMN project_details;
 ```
 
----
-## Flow Control
+---  
+### Flow Control
 
 ```
 Output into a table. 
@@ -277,10 +277,10 @@ CASE
   END AS 'South America'
 FROM Country;
 
-```  
+```   
 
 ---  
-## Foreign key
+### Foreign key
 Creating  a table with a foreign key
 ```
 CREATE TABLE interests(
@@ -293,7 +293,7 @@ REFERNCES my_contacts (contacts_id) # where the FK references to
 ```    
 
 ---  
-## Joining - INNER JOIN
+### Joining - INNER JOIN
 Join data from multiple tables
 ```
 SELECT ingredients_table3.ingredient_name, Cooking_Dir_Table.dir_usage FROM ingredients_table3
@@ -312,7 +312,7 @@ ingredients_table3.Dir_usage_key_fk <> Cooking_Dir_Table.Dir_id_key;  # where va
 ```
 
 ---  
-## Joining - OUTER JOIN
+### Joining - OUTER JOIN
 ```
 Select car, brand FROM cars_table a
 LEFT OUTER JOIN cars_wishlist b
@@ -320,7 +320,8 @@ on acar_engine = b.car_engine
 ```
 
 ---  
-## Joining - UNION combine data from multiple tables, ignoring duplicates 
+### Joining - UNION 
+combine data from multiple tables, ignoring duplicates 
 ```
 SELECT title FROM job_current
 UNION
@@ -330,6 +331,17 @@ SELECT title FROM job_listing
 ORDER BY title;
 ```
 Use UNION ALL to include duplicates 
+
+### Create a table with ```UNION```
+```
+CREATE TABLE my_union AS
+SELECT title FROM job_current
+UNION
+SELECT title FROM job_desired
+UNION
+SELECT title FROM job_listing;
+```
+
 ---  
 ## Other Useful Functions  
 
@@ -373,7 +385,8 @@ SELECT DISTINCT fieldName FROM tableName;
 SELECT COUNT(state) as numberOfcustomers FROM Customers
 WHERE state IN (Select state FROM Customers 
 GROUP BY state 
-HAVING COUNT(state) > 1);```
+HAVING COUNT(state) > 1);
+```
 
 - Table Aliases
 
